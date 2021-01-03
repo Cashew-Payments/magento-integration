@@ -7,10 +7,19 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config extends AbstractHelper
 {
+    const CASHEW_API       = 'payment/cashewpayment/cashew_api';
     const API_KEY         = 'payment/cashewpayment/api_key';
     const STORE_URL       = 'payment/cashewpayment/store_url';
     const MIN_ORDER_TOTAL = 'payment/cashewpayment/min_order_total';
     const MAX_ORDER_TOTAL = 'payment/cashewpayment/max_order_total';
+
+    public function cashewApi()
+    {
+        return $this->scopeConfig->getValue(
+            self::CASHEW_API,
+            ScopeInterface::SCOPE_WEBSITE
+        );
+    }
 
     public function apiKey()
     {
