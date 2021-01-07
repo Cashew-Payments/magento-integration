@@ -15,10 +15,10 @@ use Magento\Quote\Model\Quote as MagentoQuote;
 class Cashew extends AbstractMethod
 {
     /**
-      * Payment code
-      *
-      * @var string
-      */
+     * Payment code
+     *
+     * @var string
+     */
     protected $_code = 'cashewpayment';
 
     /**
@@ -58,7 +58,7 @@ class Cashew extends AbstractMethod
     }
 
     /**
-     * @param CartInterface|null $quote
+     * @param  CartInterface|null $quote
      * @return bool
      */
     public function isAvailable(CartInterface $quote = null): bool

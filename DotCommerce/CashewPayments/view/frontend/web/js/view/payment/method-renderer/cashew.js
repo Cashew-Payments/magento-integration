@@ -5,10 +5,12 @@ define(
     function (Component) {
         'use strict';
 
-        return Component.extend({
-            defaults: {
-                template: 'DotCommerce_CashewPayments/payment/cashew'
+        return Component.extend(
+            {
+                defaults: {
+                    template: 'DotCommerce_CashewPayments/payment/cashew'
+                }
             }
-        });
+        );
     }
 );

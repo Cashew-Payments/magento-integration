@@ -24,11 +24,11 @@ class Installment extends Template
     protected $localeResolver;
 
     /**
-     * @param Context $context
-     * @param Registry $registry
+     * @param Context               $context
+     * @param Registry              $registry
      * @param StoreManagerInterface $storeManager
-     * @param LocaleResolver $localeResolver
-     * @param array $data
+     * @param LocaleResolver        $localeResolver
+     * @param array                 $data
      */
     public function __construct(
         Context $context,
@@ -45,11 +45,13 @@ class Installment extends Template
     }
 
     /**
-     * @return  array|float
+     * @return array|float
      */
     public function getPrice()
     {
-        /** @var Product $product */
+        /**
+ * @var Product $product 
+*/
         $product = $this->registry->registry('product');
 
         return $product->getPrice();

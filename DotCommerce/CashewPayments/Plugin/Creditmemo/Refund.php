@@ -1,4 +1,8 @@
 <?php
+/**
+ * Magento 2 extension for Cashew Payments
+ * Integrate refunds
+ */
 
 namespace DotCommerce\CashewPayments\Plugin\Creditmemo;
 
@@ -50,7 +54,7 @@ class Refund
 
             if ($response['status'] !== 'success') {
                 $this->logger->debug('Refunded Errors:');
-                $this->logger->debug(print_r(json_encode($response),true));
+                $this->logger->debug(print_r(json_encode($response), true));
             }
         }
 

@@ -163,7 +163,7 @@ class Api extends AbstractHelper
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . $endpoint, $data);
 
-        $response = json_decode($this->curl->getBody(),true);
+        $response = json_decode($this->curl->getBody(), true);
 
         /*$this->logger->debug(print_r($response, true));*/
 

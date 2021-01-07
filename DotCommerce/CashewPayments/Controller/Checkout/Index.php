@@ -19,9 +19,9 @@ class Index extends Action
     protected $apiHelper;
 
     /**
-     * @param Context $context
+     * @param Context          $context
      * @param ResultRawFactory $resultRawFactory
-     * @param ApiHelper $apiHelper
+     * @param ApiHelper        $apiHelper
      */
     public function __construct(
         Context $context,
