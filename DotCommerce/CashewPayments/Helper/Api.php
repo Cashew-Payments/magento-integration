@@ -82,8 +82,14 @@ class Api extends AbstractHelper
     {
         $order = $this->orderFactory->create()->load($orderId);
 
-        $shippingCountryName = $this->countryFactory->create()->loadByCode($order->getShippingAddress()->getCountryId())->getName();
-        $billingCountryName  = $this->countryFactory->create()->loadByCode($order->getBillingAddress()->getCountryId())->getName();
+        $shippingCountryName = $this->countryFactory
+            ->create()
+            ->loadByCode($order->getShippingAddress()->getCountryId())
+            ->getName();
+        $billingCountryName  = $this->countryFactory
+            ->create()
+            ->loadByCode($order->getBillingAddress()->getCountryId())
+            ->getName();
 
         $orderData = [
             'orderReference'    => !empty($order->getIncrementId()) ? $order->getIncrementId() : null,

@@ -1,6 +1,8 @@
 <?php
 /**
  * Magento 2 extension for Cashew Payments
+ * 
+ * @author DotCommerce <mi@discretecommerce.com>
  */
 
 namespace DotCommerce\CashewPayments\Block\Product\View;
@@ -12,6 +14,11 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Model\Product;
 use Magento\Store\Model\StoreManagerInterface;
 
+/**
+ * Class to support fetch data from product
+ * 
+ * @author DotCommerce <mi@discretecommerce.com>
+ */
 class Installment extends Template
 {
     /**
@@ -24,11 +31,13 @@ class Installment extends Template
     protected $localeResolver;
 
     /**
-     * @param Context               $context
-     * @param Registry              $registry
-     * @param StoreManagerInterface $storeManager
-     * @param LocaleResolver        $localeResolver
-     * @param array                 $data
+     * Get product price and system laguange and currency code
+     * 
+     * @param Context               $context        context for installment
+     * @param Registry              $registry       registry for installment
+     * @param StoreManagerInterface $storeManager   store manager reference
+     * @param LocaleResolver        $localeResolver local resolver
+     * @param array                 $data           data related to products
      */
     public function __construct(
         Context $context,
@@ -45,25 +54,37 @@ class Installment extends Template
     }
 
     /**
+     * Get product price
+     * 
      * @return array|float
      */
     public function getPrice()
     {
-        /**
- * @var Product $product 
-*/
         $product = $this->registry->registry('product');
 
         return $product->getPrice();
     }
 
+    /**
+     * Get system currency
+     * 
+     * @return $currencyCode currency code of the system
+     */
     public function getCurrency()
     {
-        $currencyCode = $this->storeManager->getStore()->getCurrentCurrency()->getCode();
+        $currencyCode = $this->storeManager
+            ->getStore()
+            ->getCurrentCurrency()
+            ->getCode();
 
         return $currencyCode;
     }
 
+    /**
+     * Get system language
+     * 
+     * @return $langCode language code of the system
+     */
     public function getLang()
     {
         $localeCode = $this->localeResolver->getLocale();
