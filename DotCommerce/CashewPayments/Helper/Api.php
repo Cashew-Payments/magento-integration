@@ -25,7 +25,6 @@ class Api extends AbstractHelper
 
     protected $config;
 
-    const API_URL = "https://api-dev.cashewpayments.com/v1/";
     const API_TOKEN = "identity/store/authorize";
 
     public function __construct(
@@ -62,7 +61,7 @@ class Api extends AbstractHelper
         ];
 
         $this->curl->setHeaders($headers);
-        $this->curl->post(self::API_URL . '' . self::API_TOKEN, []);
+        $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
         $response = json_decode($this->curl->getBody(), true);
 
@@ -162,7 +161,7 @@ class Api extends AbstractHelper
         $headers = ['Authorization' => $auth, 'Content-Type' => 'application/json'];
 
         $this->curl->setHeaders($headers);
-        $this->curl->post(self::API_URL . $endpoint, $data);
+        $this->curl->post($this->config->apiDomain() . $endpoint, $data);
 
         $response = json_decode($this->curl->getBody(),true);
 
