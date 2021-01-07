@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento 2 extension for Cashew Payments
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Module/etc/module.xsd">
+    <module name="DotCommerce_CashewPayments" setup_version="1.0.0"/>
+</config>

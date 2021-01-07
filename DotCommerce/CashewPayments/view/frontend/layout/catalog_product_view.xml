@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento 2 extension for Cashew Payments
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="DotCommerce\CashewPayments\Block\Product\View\Installment" name="cashew.installment" after="product.info.price" template="DotCommerce_CashewPayments::product/view/installment.phtml" />
+        </referenceContainer>
+    </body>
+</page>
