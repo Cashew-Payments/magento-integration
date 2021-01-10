@@ -1,4 +1,15 @@
 <?php
+/**
+ * Magento 2 extension for Cashew Payments
+ * 
+ * PHP version 7
+ * 
+ * @category Api
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
+ */
 
 namespace DotCommerce\CashewPayments\Helper;
 
@@ -9,6 +20,17 @@ use Magento\Framework\HTTP\Client\Curl;
 use Magento\Framework\UrlInterface;
 use Psr\Log\LoggerInterface as Logger;
 
+/**
+ * Magento 2 extension for Cashew Payments
+ * 
+ * PHP version 7
+ * 
+ * @category Api
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
+ */
 class Api extends AbstractHelper
 {
     protected $curl;
@@ -27,6 +49,29 @@ class Api extends AbstractHelper
 
     const API_TOKEN = "identity/store/authorize";
 
+    /**
+     * Magento 2 extension for Cashew Payments
+     * 
+     * PHP version 7
+     * 
+     * @category Api
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     * 
+     * @param $curl
+     * @param $logger
+     * @param $url
+     * @param $response
+     * @param $managerInterface
+     * @param $resultRedirectFactory
+     * @param $orderFactory
+     * @param $productRepository
+     * @param $storeManager
+     * @param $countryFactory
+     * @param $config
+     */
     public function __construct(
         Curl $curl,
         Logger $logger,
@@ -53,6 +98,17 @@ class Api extends AbstractHelper
         $this->config = $config;
     }
 
+    /**
+     * Get token from cashew payments
+     * 
+     * PHP version 7
+     * 
+     * @category Api
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     */
     public function getToken()
     {
         $headers = [
@@ -78,6 +134,19 @@ class Api extends AbstractHelper
         return null;
     }
 
+    /**
+     * Send checkout payload to cashew system
+     * 
+     * PHP version 7
+     * 
+     * @category Api
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     * 
+     * @param $orderId order if from merchant
+     */
     public function checkout($orderId)
     {
         $order = $this->orderFactory->create()->load($orderId);
@@ -92,59 +161,143 @@ class Api extends AbstractHelper
             ->getName();
 
         $orderData = [
-            'orderReference'    => !empty($order->getIncrementId()) ? $order->getIncrementId() : null,
-            'totalAmount'       => !empty($order->getGrandTotal()) ? (int)$order->getGrandTotal() : null,
-            'taxAmount'         => !empty($order->getTaxAmount()) ? (int)$order->getTaxAmount() : null,
-            'currencyCode'      => !empty($order->getBaseCurrencyCode()) ? $order->getBaseCurrencyCode() : null,
-            'shipping'          => [
-                'reference'         => null,
-                'name'              => null,
-                'address'           => [
-                    'firstName'         => !empty($order->getShippingAddress()->getFirstname()) ? $order->getShippingAddress()->getFirstname() : null,
-                    'lastName'          => !empty($order->getShippingAddress()->getLastname()) ? $order->getShippingAddress()->getLastname() : null,
-                    'phone'             => !empty($order->getShippingAddress()->getTelephone()) ? $order->getShippingAddress()->getTelephone() : 0,
+            'orderReference' => !empty($order->getIncrementId()) 
+            ? $order->getIncrementId() 
+            : null,
+            'totalAmount' => !empty($order->getGrandTotal()) 
+            ? (int)$order->getGrandTotal() 
+            : null,
+            'taxAmount' => !empty($order->getTaxAmount()) 
+            ? (int)$order->getTaxAmount() 
+            : null,
+            'currencyCode' => !empty($order->getBaseCurrencyCode()) 
+            ? $order->getBaseCurrencyCode() 
+            : null,
+            'shipping' => [
+                'reference' => null,
+                'name' => null,
+                'address' => [
+                    'firstName' => 
+                    !empty($order->getShippingAddress()->getFirstname()) 
+                    ? $order->getShippingAddress()->getFirstname() 
+                    : null,
+                    'lastName'          => 
+                    !empty($order->getShippingAddress()->getLastname()) 
+                    ? $order->getShippingAddress()->getLastname() 
+                    : null,
+                    'phone'             => 
+                    !empty($order->getShippingAddress()->getTelephone()) 
+                    ? $order->getShippingAddress()->getTelephone() 
+                    : 0,
                     'alternatePhone'    => 0,
-                    'line1'             => !empty($order->getShippingAddress()->getStreet()[0]) ? $order->getShippingAddress()->getStreet()[0] : null,
-                    'line2'             => !empty($order->getShippingAddress()->getStreet()[1]) ? $order->getShippingAddress()->getStreet()[1] : null,
-                    'city'              => !empty($order->getShippingAddress()->getCity()) ? $order->getShippingAddress()->getCity() : null,
-                    'state'             => !empty($order->getShippingAddress()->getRegion()) ? $order->getShippingAddress()->getRegion() : null,
-                    'country'           => !empty($shippingCountryName) ? $shippingCountryName : null,
-                    'postalCode'        => !empty($order->getShippingAddress()->getPostcode()) ? $order->getShippingAddress()->getPostcode() : null
+                    'line1'             => 
+                    !empty($order->getShippingAddress()->getStreet()[0]) 
+                    ? $order->getShippingAddress()->getStreet()[0] 
+                    : null,
+                    'line2'             => 
+                    !empty($order->getShippingAddress()->getStreet()[1]) 
+                    ? $order->getShippingAddress()->getStreet()[1] 
+                    : null,
+                    'city'              => 
+                    !empty($order->getShippingAddress()->getCity()) 
+                    ? $order->getShippingAddress()->getCity() 
+                    : null,
+                    'state'             => 
+                    !empty($order->getShippingAddress()->getRegion()) 
+                    ? $order->getShippingAddress()->getRegion() 
+                    : null,
+                    'country'           => 
+                    !empty($shippingCountryName)
+                    ? $shippingCountryName 
+                    : null,
+                    'postalCode'        => 
+                    !empty($order->getShippingAddress()->getPostcode()) 
+                    ? $order->getShippingAddress()->getPostcode() 
+                    : null
                 ],
             ],
             'billingAddress'    => [
-                'firstName'         => !empty($order->getBillingAddress()->getFirstname()) ? $order->getBillingAddress()->getFirstname() : null,
-                'lastName'          => !empty($order->getBillingAddress()->getLastname()) ? $order->getBillingAddress()->getLastname() : null,
-                'phone'             => !empty($order->getBillingAddress()->getTelephone()) ? $order->getBillingAddress()->getTelephone() : null,
+                'firstName'         => 
+                !empty($order->getBillingAddress()->getFirstname()) 
+                ? $order->getBillingAddress()->getFirstname() : null,
+                'lastName'          => 
+                !empty($order->getBillingAddress()->getLastname()) 
+                ? $order->getBillingAddress()->getLastname() : null,
+                'phone'             => 
+                !empty($order->getBillingAddress()->getTelephone()) 
+                ? $order->getBillingAddress()->getTelephone() : null,
                 'alternatePhone'    => 0,
-                'line1'             => !empty($order->getBillingAddress()->getStreet()[0]) ? $order->getBillingAddress()->getStreet()[0] : null,
-                'line2'             => !empty($order->getBillingAddress()->getStreet()[1]) ? $order->getBillingAddress()->getStreet()[1] : null,
-                'city'              => !empty($order->getBillingAddress()->getCity()) ? $order->getBillingAddress()->getCity() : null,
-                'state'             => !empty($order->getBillingAddress()->getRegion()) ? $order->getBillingAddress()->getRegion() : null,
-                'country'           => !empty($billingCountryName) ? $billingCountryName : null,
-                'postalCode'        => !empty($order->getBillingAddress()->getPostcode()) ? $order->getBillingAddress()->getPostcode() : null
+                'line1'             => 
+                !empty($order->getBillingAddress()->getStreet()[0]) 
+                ? $order->getBillingAddress()->getStreet()[0] : null,
+                'line2'             => 
+                !empty($order->getBillingAddress()->getStreet()[1]) 
+                ? $order->getBillingAddress()->getStreet()[1] : null,
+                'city'              => 
+                !empty($order->getBillingAddress()->getCity()) 
+                ? $order->getBillingAddress()->getCity() : null,
+                'state'             => 
+                !empty($order->getBillingAddress()->getRegion()) 
+                ? $order->getBillingAddress()->getRegion() : null,
+                'country'           => 
+                !empty($billingCountryName) 
+                ? $billingCountryName : null,
+                'postalCode'        => 
+                !empty($order->getBillingAddress()->getPostcode()) 
+                ? $order->getBillingAddress()->getPostcode() : null
             ],
             'customer'          => [
-                'id'                => !empty($order->getCustomerId()) ? $order->getCustomerId() : null,
-                'mobileNumber'      => !empty($order->getShippingAddress()->getTelephone()) ? $order->getShippingAddress()->getTelephone() : null,
-                'email'             => !empty($order->getCustomerEmail()) ? $order->getCustomerEmail() : null,
-                'firstName'         => !empty($order->getCustomerFirstname()) ? $order->getCustomerFirstname() : null,
-                'lastName'          => !empty($order->getCustomerLastname()) ? $order->getCustomerLastname() : null,
-                'gender'            => !empty($order->getCustomerGender()) ? $order->getCustomerGender() : null,
-                'account'           => !empty($order->getCustomerId()) ? $order->getCustomerId() : null,
+                'id'                => 
+                !empty($order->getCustomerId()) 
+                ? $order->getCustomerId() : null,
+                'mobileNumber'      => 
+                !empty($order->getShippingAddress()->getTelephone()) 
+                ? $order->getShippingAddress()->getTelephone() : null,
+                'email'             => 
+                !empty($order->getCustomerEmail()) 
+                ? $order->getCustomerEmail() : null,
+                'firstName'         => 
+                !empty($order->getCustomerFirstname()) 
+                ? $order->getCustomerFirstname() : null,
+                'lastName'          => 
+                !empty($order->getCustomerLastname()) 
+                ? $order->getCustomerLastname() : null,
+                'gender'            => 
+                !empty($order->getCustomerGender()) 
+                ? $order->getCustomerGender() : null,
+                'account'           => 
+                !empty($order->getCustomerId()) 
+                ? $order->getCustomerId() : null,
                 'dateOfBirth'       => null,
                 'dateJoined'        => null,
                 'defaultAddress'        => [
-                    'firstName'         => !empty($order->getShippingAddress()->getFirstname()) ? $order->getShippingAddress()->getFirstname() : null,
-                    'lastName'          => !empty($order->getShippingAddress()->getLastname()) ? $order->getShippingAddress()->getLastname() : null,
-                    'phone'             => !empty($order->getShippingAddress()->getTelephone()) ? $order->getShippingAddress()->getTelephone() : null,
+                    'firstName'         => 
+                    !empty($order->getShippingAddress()->getFirstname()) 
+                    ? $order->getShippingAddress()->getFirstname() : null,
+                    'lastName'          => 
+                    !empty($order->getShippingAddress()->getLastname()) 
+                    ? $order->getShippingAddress()->getLastname() : null,
+                    'phone'             => 
+                    !empty($order->getShippingAddress()->getTelephone()) 
+                    ? $order->getShippingAddress()->getTelephone() : null,
                     'alternatePhone'    => '',
-                    'line1'             => !empty($order->getShippingAddress()->getStreet()[0]) ? $order->getShippingAddress()->getStreet()[0] : null,
-                    'line2'             => !empty($order->getShippingAddress()->getStreet()[1]) ? $order->getShippingAddress()->getStreet()[1] : null,
-                    'city'              => !empty($order->getShippingAddress()->getCity()) ? $order->getShippingAddress()->getCity() : null,
-                    'state'             => !empty($order->getShippingAddress()->getRegion()) ? $order->getShippingAddress()->getRegion() : null,
-                    'country'           => !empty($shippingCountryName) ? $shippingCountryName : null,
-                    'postalCode'        => !empty($order->getShippingAddress()->getPostcode()) ? $order->getShippingAddress()->getPostcode() : null
+                    'line1'             => 
+                    !empty($order->getShippingAddress()->getStreet()[0]) 
+                    ? $order->getShippingAddress()->getStreet()[0] : null,
+                    'line2'             => 
+                    !empty($order->getShippingAddress()->getStreet()[1]) 
+                    ? $order->getShippingAddress()->getStreet()[1] : null,
+                    'city'              => 
+                    !empty($order->getShippingAddress()->getCity()) 
+                    ? $order->getShippingAddress()->getCity() : null,
+                    'state'             => 
+                    !empty($order->getShippingAddress()->getRegion()) 
+                    ? $order->getShippingAddress()->getRegion() : null,
+                    'country'           => 
+                    !empty($shippingCountryName) ? $shippingCountryName : null,
+                    'postalCode'        => 
+                    !empty($order->getShippingAddress()->getPostcode()) 
+                    ? $order->getShippingAddress()->getPostcode() : null
                 ],
             ],
             'items'             => $this->getItems($orderId),
@@ -156,12 +309,26 @@ class Api extends AbstractHelper
             'metaData'          => []
         ];
 
-        /*$this->logger->debug(print_r($orderData,true));*/
         $orderData = json_encode($orderData, true);
 
         return $orderData;
     }
 
+    /**
+     * Send data to cashew system
+     * 
+     * PHP version 7
+     * 
+     * @category Api
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     * 
+     * @param $auth 
+     * @param $data
+     * @param $endpoint
+     */
     public function postData($auth, $data, $endpoint)
     {
         $headers = ['Authorization' => $auth, 'Content-Type' => 'application/json'];
@@ -171,16 +338,26 @@ class Api extends AbstractHelper
 
         $response = json_decode($this->curl->getBody(), true);
 
-        /*$this->logger->debug(print_r($response, true));*/
-
         return $response;
     }
 
+    /**
+     * Get items from order id
+     * 
+     * PHP version 7
+     * 
+     * @category Api
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     * 
+     * @param $orderId order from merchant
+     */
     private function getItems($orderId)
     {
         $orderDetails = $this->orderFactory->create()->load($orderId);
         $store = $this->storeManager->getStore();
-
         $dataItems = [];
 
         foreach ($orderDetails->getItemsCollection() as $item) {
@@ -194,10 +371,8 @@ class Api extends AbstractHelper
                 'unitPrice' => $item->getPrice(),
                 'quantity' => (int)$item->getqty_ordered()
             ];
-
             $dataItems[] = $dataItem;
         }
-
         return $dataItems;
     }
 }

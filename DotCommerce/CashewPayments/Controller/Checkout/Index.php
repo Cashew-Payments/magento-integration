@@ -1,6 +1,14 @@
 <?php
 /**
  * Magento 2 extension for Cashew Payments
+ * 
+ * PHP version 7
+ * 
+ * @category Checkout
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
  */
 
 namespace DotCommerce\CashewPayments\Controller\Checkout;
@@ -11,6 +19,17 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\RawFactory as ResultRawFactory;
 
+/**
+ * Magento 2 extension for Cashew Payments
+ * 
+ * PHP version 7
+ * 
+ * @category Checkout
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
+ */
 class Index extends Action
 {
     const API_POST = 'checkouts';
@@ -18,10 +37,21 @@ class Index extends Action
     protected $resultRawFactory;
     protected $apiHelper;
 
+    
     /**
-     * @param Context          $context
-     * @param ResultRawFactory $resultRawFactory
-     * @param ApiHelper        $apiHelper
+     * Magento 2 extension for Cashew Payments
+     * 
+     * PHP version 7
+     * 
+     * @category Checkout
+     * @package  CashewPayments
+     * @author   DotCommerce <mi@discretecommerce.com>
+     * @license  https://www.cashewpayments.com/license.txt cashew License
+     * @link     https://www.cashewpayments.com
+     * 
+     * @param Context          $context          Context
+     * @param ResultRawFactory $resultRawFactory Result raw
+     * @param ApiHelper        $apiHelper        Api helper
      */
     public function __construct(
         Context $context,
@@ -42,7 +72,8 @@ class Index extends Action
             $token = $this->apiHelper->getToken();
             if ($token) {
                 $jsonData = $this->apiHelper->checkout($orderId);
-                $data = $this->apiHelper->postData($token, $jsonData, self::API_POST);
+                $data = $this->apiHelper
+                    ->postData($token, $jsonData, self::API_POST);
                 $data['data']['storeToken'] = $token;
 
                 $response = $this->resultRawFactory->create()

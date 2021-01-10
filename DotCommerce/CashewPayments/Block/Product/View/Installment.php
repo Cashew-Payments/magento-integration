@@ -2,7 +2,13 @@
 /**
  * Magento 2 extension for Cashew Payments
  * 
- * @author DotCommerce <mi@discretecommerce.com>
+ * PHP version 7
+ * 
+ * @category Installment
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
  */
 
 namespace DotCommerce\CashewPayments\Block\Product\View;
@@ -17,7 +23,13 @@ use Magento\Store\Model\StoreManagerInterface;
 /**
  * Class to support fetch data from product
  * 
- * @author DotCommerce <mi@discretecommerce.com>
+ * PHP version 7
+ * 
+ * @category Installment
+ * @package  CashewPayments
+ * @author   DotCommerce <mi@discretecommerce.com>
+ * @license  https://www.cashewpayments.com/license.txt cashew License
+ * @link     https://www.cashewpayments.com
  */
 class Installment extends Template
 {
