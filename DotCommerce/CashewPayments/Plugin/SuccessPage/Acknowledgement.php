@@ -10,7 +10,7 @@ use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 
 class Success extends \Magento\Checkout\Controller\Onepage
 {
-    const API_POST = 'refunds/merchant';
+    const API_POST = 'stores/magento/order/status';
     protected $apiHelper;
     public function __construct(
         \Magento\Framework\Registry $coreRegistry,
@@ -33,15 +33,10 @@ class Success extends \Magento\Checkout\Controller\Onepage
         if (!$this->_objectManager->get(\Magento\Checkout\Model\Session\SuccessValidator::class)->isValid()) {
             $data = [
                 'orderReference' => $session->getLastOrderId(),
-                'refundAmount'   => 0
+                'orderStatus'   => 'CONFIRMED'
             ];
             $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
-
-            if ($response['status'] !== 'success') {
-                $this->logger->debug('Refunded Errors:');
-                $this->logger->debug(print_r(json_encode($response), true));
-            }
         }
         return $resultPage;
     }
