@@ -13,6 +13,7 @@
 
 namespace DotCommerce\CashewPayments\Block\Product\View;
 
+use DotCommerce\CashewPayments\Helper\Config;
 use Magento\Framework\Locale\Resolver as LocaleResolver;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
@@ -34,12 +35,23 @@ use Magento\Store\Model\StoreManagerInterface;
 class Installment extends Template
 {
     /**
-     * Core registry
-     *
+     * @var Config
+     */
+    protected $config;
+
+    /**
      * @var Registry
      */
     protected $registry = null;
+
+    /**
+     * @var StoreManagerInterface
+     */
     protected $storeManager;
+
+    /**
+     * @var StoreManagerInterface
+     */
     protected $localeResolver;
 
     /**
@@ -49,6 +61,7 @@ class Installment extends Template
      * @param Registry              $registry       registry for installment
      * @param StoreManagerInterface $storeManager   store manager reference
      * @param LocaleResolver        $localeResolver local resolver
+     * @param Config                $config         config helper
      * @param array                 $data           data related to products
      */
     public function __construct(
@@ -56,13 +69,27 @@ class Installment extends Template
         Registry $registry,
         StoreManagerInterface $storeManager,
         LocaleResolver $localeResolver,
+        Config $config,
         array $data = []
     ) {
+        $this->config = $config;
         $this->registry = $registry;
         $this->storeManager = $storeManager;
         $this->localeResolver = $localeResolver;
 
         parent::__construct($context, $data);
+    }
+
+    /**
+     * Get module status
+     *
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        $isEnabled = $this->config->getIsEnabled();
+
+        return $isEnabled;
     }
 
     /**
