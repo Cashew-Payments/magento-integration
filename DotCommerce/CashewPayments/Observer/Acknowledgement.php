@@ -5,7 +5,7 @@
  * See COPYING.txt for license details.
  */
 
-namespace DotCommerce\CashewPayments\Checkout\Observer; 
+namespace DotCommerce\CashewPayments\Observer; 
 use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Event\ObserverInterface;
