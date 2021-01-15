@@ -76,7 +76,7 @@ class Index extends Action
         if ($orderId) {
             $order = $this->orderFactory->create();
             $order->load($orderId);
-            $order->setState(Mage_Sales_Model_Order::STATE_HOLDED, true)->save();
+            $order->setState(Order::STATE_HOLDED, true)->save();
             $token = $this->apiHelper->getToken();
             if ($token) {
                 $jsonData = $this->apiHelper->checkout($orderId);
