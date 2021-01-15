@@ -10,7 +10,7 @@ use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 use Psr\Log\LoggerInterface;
 use Magento\Framework\Event\ObserverInterface;
 class Acknowledgement implements ObserverInterface { 
-    const API_POST = 'stores/magento/acknowledge';
+    const API_POST = 'stores/magento/order/status';
 
     /**
      * Order Model
@@ -49,7 +49,8 @@ class Acknowledgement implements ObserverInterface {
         $order = $this->order->load($orderId);
         if ($order->getPayment()->getMethod() == 'cashewpayment') {
             $data = [
-                'orderReference' => $orderId
+                'orderReference' => $orderId,
+                'orderStatus' => 'CONFIRMED'
             ];
             $this->logger->debug('success:');
                 $token = $this->apiHelper->getToken();
