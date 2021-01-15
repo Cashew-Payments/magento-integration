@@ -48,10 +48,7 @@ class Acknowledgement implements ObserverInterface {
        $orderId = $observer->getEvent()->getOrderIds();
         $order = $this->order->load($orderId);
 
-        //get Order All Item
-        $itemCollection = $order->getItemsCollection();
-        $customer = $order->getCustomerId(); // using this id you can get customer name
         $this->logger->debug('success:');
-        $this->logger->debug($customer);
+        $this->logger->debug($order->getPayment()->getMethod());
     }
 }
