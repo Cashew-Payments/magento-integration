@@ -20,7 +20,7 @@ class Success extends \Magento\Checkout\Controller\Onepage
     public function __construct(
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Checkout\Model\Session $checkoutSession,
-        ApiHelper $apiHelper,
+        ApiHelper $apiHelper
         // Config $config
 
     ) {
