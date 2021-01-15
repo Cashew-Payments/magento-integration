@@ -19,6 +19,7 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\RawFactory as ResultRawFactory;
 use Magento\Sales\Model\Order;
+use Magento\Sales\Model\OrderFactory;
 
 /**
  * Magento 2 extension for Cashew Payments
@@ -37,6 +38,7 @@ class Index extends Action
 
     protected $resultRawFactory;
     protected $apiHelper;
+    protected $orderFactory;
 
     
     /**
@@ -57,10 +59,12 @@ class Index extends Action
     public function __construct(
         Context $context,
         ResultRawFactory $resultRawFactory,
-        ApiHelper $apiHelper
+        ApiHelper $apiHelper,
+        \Magento\Sales\Model\OrderFactory $orderFactory
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->apiHelper = $apiHelper;
+        $this->orderFactory = $orderFactory;
 
         parent::__construct($context);
     }
@@ -70,7 +74,8 @@ class Index extends Action
         $orderId = $this->_request->getParam('orderId');
 
         if ($orderId) {
-            $order = $this->order->load($orderId);
+            $order = $this->orderFactory->create();
+            $order->load($orderId);
             $order->setState(Mage_Sales_Model_Order::STATE_HOLDED, true)->save();
             $token = $this->apiHelper->getToken();
             if ($token) {
