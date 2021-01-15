@@ -6,7 +6,7 @@
  */
 namespace DotCommerce\CashewPayments\Controller\Onepage;
 
-use DotCommerce\CashewPayments\Helper\Config;
+// use DotCommerce\CashewPayments\Helper\Config;
 use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 
 class Success extends \Magento\Checkout\Controller\Onepage
@@ -21,13 +21,13 @@ class Success extends \Magento\Checkout\Controller\Onepage
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Checkout\Model\Session $checkoutSession,
         ApiHelper $apiHelper,
-        Config $config
+        // Config $config
 
     ) {
         $this->_coreRegistry = $coreRegistry;
         $this->_checkoutSession = $checkoutSession;
         $this->apiHelper = $apiHelper;
-        $this->config = $config;
+        // $this->config = $config;
     }
 
     public function getOrder()
