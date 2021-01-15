@@ -6,7 +6,7 @@
  */
 
 namespace DotCommerce\CashewPayments\Checkout\Observer; 
-
+use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 use Magento\Framework\Event\ObserverInterface;
 class Acknowledgement implements ObserverInterface { 
 
