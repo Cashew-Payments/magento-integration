@@ -6,20 +6,28 @@
  */
 namespace DotCommerce\CashewPayments\Controller\Onepage;
 
+use DotCommerce\CashewPayments\Helper\Config;
 use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 
 class Success extends \Magento\Checkout\Controller\Onepage
 {
     const API_POST = 'stores/magento/order/status';
     protected $apiHelper;
+    /**
+     * @var Config
+     */
+    protected $config;
     public function __construct(
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Checkout\Model\Session $checkoutSession,
-        ApiHelper $apiHelper
+        ApiHelper $apiHelper,
+        Config $config
+
     ) {
         $this->_coreRegistry = $coreRegistry;
         $this->_checkoutSession = $checkoutSession;
         $this->apiHelper = $apiHelper;
+        $this->config = $config;
     }
 
     public function getOrder()
@@ -35,6 +43,7 @@ class Success extends \Magento\Checkout\Controller\Onepage
                 'orderReference' => $session->getLastOrderId(),
                 'orderStatus'   => 'CONFIRMED'
             ];
+            $token = $this->apiHelper->getToken();
             $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
         }
