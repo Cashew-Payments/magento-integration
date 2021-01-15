@@ -18,6 +18,7 @@ use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\RawFactory as ResultRawFactory;
+use Magento\Sales\Model\Order;
 
 /**
  * Magento 2 extension for Cashew Payments
@@ -69,6 +70,8 @@ class Index extends Action
         $orderId = $this->_request->getParam('orderId');
 
         if ($orderId) {
+            $order = $this->order->load($orderId);
+            $order->setState(Mage_Sales_Model_Order::STATE_HOLDED, true)->save();
             $token = $this->apiHelper->getToken();
             if ($token) {
                 $jsonData = $this->apiHelper->checkout($orderId);
