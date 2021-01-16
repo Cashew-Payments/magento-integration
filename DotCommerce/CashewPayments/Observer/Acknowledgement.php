@@ -53,6 +53,9 @@ class Acknowledgement implements ObserverInterface {
                 'orderStatus' => 'CONFIRMED'
             ];
             $this->logger->debug('success:');
+            $this->logger->debug($orderId);
+            $this->logger->debug($data);
+            $this->logger->debug(json_encode($data));
                 $token = $this->apiHelper->getToken();
                 $response = $this->apiHelper
                     ->postData($token, json_encode($data), self::API_POST);
