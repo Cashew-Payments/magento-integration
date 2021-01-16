@@ -76,7 +76,7 @@ class Index extends Action
         if ($orderId) {
             $order = $this->orderFactory->create();
             $order->load($orderId);
-            $order->setState(Order::STATE_PENDING_PAYMENT, true)->save();
+            $order->setState(Order::STATE_PENDING_PAYMENT, true)->setStatus(Order::STATE_PENDING_PAYMENT)->save();
             $token = $this->apiHelper->getToken();
             if ($token) {
                 $jsonData = $this->apiHelper->checkout($orderId);
