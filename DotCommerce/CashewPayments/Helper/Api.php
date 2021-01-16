@@ -161,8 +161,8 @@ class Api extends AbstractHelper
             ->getName();
 
         $orderData = [
-            'orderReference' => !empty($order->getIncrementId()) 
-            ? $order->getIncrementId() 
+            'orderReference' => !empty($order->getEntityId()) 
+            ? $order->getEntityId() 
             : null,
             'totalAmount' => !empty($order->getGrandTotal()) 
             ? (int)$order->getGrandTotal() 
