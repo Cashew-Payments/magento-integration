@@ -21,9 +21,6 @@
                 <field id="store_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
                     <label>Store Url</label>
                 </field>
-                <field id="api_domain" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
-                    <label>API Domain</label>
-                </field>
                 <field id="environment_mode" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Environment</label>
                     <source_model>DotCommerce\CashewPayments\Model\Source\Mode</source_model>
