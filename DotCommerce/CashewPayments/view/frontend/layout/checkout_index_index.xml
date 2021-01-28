@@ -5,10 +5,10 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <script src="https://s3-eu-west-1.amazonaws.com/cdn-sandbox.cashewpayments.com/widgets/magento.checkout.min.js" src_type="url" ifconfig="payment/cashewpayment/test"/>
-    </head>
     <body>
+        <referenceBlock name="head.additional">
+            <block class="DotCommerce\CashewPayments\Block\CheckoutCashew" name="cashewpayments.cart.view" template="checkout.phtml"/>
+        </referenceBlock>
         <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
