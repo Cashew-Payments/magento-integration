@@ -68,8 +68,6 @@ class Cashew extends AbstractMethod
             $currency = $quote->getCurrencyCode();
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
-            print_r($quote);
-            print_r($currency);
             $this->logger->error($quote);
             $this->logger->error($currency);
             // if ($currency === 'AED' || $currency === 'SAR') {
