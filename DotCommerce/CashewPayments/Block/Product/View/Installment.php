@@ -93,6 +93,18 @@ class Installment extends Template
     }
 
     /**
+     * Get environment
+     *
+     * @return bool
+     */
+    public function getEnvironment()
+    {
+        return $this->config->getEnvironment() === 'sandbox' ? 
+        'https://s3-eu-west-1.amazonaws.com/cdn-sandbox.cashewpayments.com/' : 
+        'https://cdn.cashewpayments.com/';
+    }
+
+    /**
      * Get product price
      * 
      * @return array|float
