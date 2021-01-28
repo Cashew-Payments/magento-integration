@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * Magento 2 extension for Cashew Payments
+ */
+
+/** @var $block DotCommerce\CashewPayments\Block\Checkout\View\Checkout */
+?>
+
+<?php if ($block->isEnabled() && 
+($block->getCurrency() === 'AED' || $block->getCurrency() === 'SAR') && 
+($block->getLang() === 'en' || $block->getLang() === 'ar')): ?>
+
+    <script src="<?= $block->getEnvironment() ?>widgets/magento.checkout.min.js" />
+
+<?php endif; ?>
