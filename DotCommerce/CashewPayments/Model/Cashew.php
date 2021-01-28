@@ -74,7 +74,7 @@ class Cashew extends AbstractMethod
             
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
-            if ($currency === 'AED' || $quote->getBaseCurrencyCode() === 'AED') {
+            if ($currency === 'AED') {
                 if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
                     return true;
                 }
