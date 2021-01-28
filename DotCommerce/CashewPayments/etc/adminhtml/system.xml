@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <!--
-/**
- * Magento 2 extension for Cashew Payments
+/*
+ * @category    cashewPayments
+ * @package     cashew_Payments
+ * @copyright   Copyright (c) cashew (https://www.cashewpayments.com/)
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">

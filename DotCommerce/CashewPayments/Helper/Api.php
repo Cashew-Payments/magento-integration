@@ -111,11 +111,12 @@ class Api extends AbstractHelper
      */
     public function getToken()
     {
+        $store = $this->storeManager->getStore();
+        $this->logger->debug('STORE URL: '.$store->getBaseUrl());
         $headers = [
             'cashewSecretKey' => $this->config->apiKey(),
             'storeUrl' => $this->config->storeUrl()
         ];
-
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
