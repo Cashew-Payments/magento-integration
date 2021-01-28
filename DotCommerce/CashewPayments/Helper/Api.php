@@ -121,6 +121,8 @@ class Api extends AbstractHelper
 
         $response = json_decode($this->curl->getBody(), true);
 
+        $this->logger->debug('cashewSecretKey: '. $this->config->apiKey().' storeUrl: '. $this->config->storeUrl());
+
         $this->logger->debug(print_r($response,true));
         $this->logger->debug('STATUS :: ' . $response['status']);
 
