@@ -6,9 +6,9 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="head.additional">
-            <block class="DotCommerce\CashewPayments\Block\Checkout\View\CheckoutCashew" name="cashewcheckout" template="DotCommerce_CashewPayments::checkout.phtml" />
-        </referenceBlock>
+        <referenceContainer name="checkout.payment.method">
+        <block class="DotCommerce\CashewPayments\Block\Checkout\View\CheckoutCashew" name="cashewcheckout" after="payments" template="DotCommerce_CashewPayments::checkout.phtml" />
+        </referenceContainer>
         <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
