@@ -25,6 +25,10 @@ class Cashew extends AbstractMethod
      * @var ConfigHelper
      */
     protected $config;
+    /**
+     * @var LoggerHelper
+     */
+    protected $logger;
 
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -55,6 +59,7 @@ class Cashew extends AbstractMethod
         );
 
         $this->config = $config;
+        $this->logger = $logger;
     }
 
     /**
@@ -68,8 +73,8 @@ class Cashew extends AbstractMethod
             $currency = $quote->getCurrencyCode();
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
-            $this->logger->error($quote);
-            $this->logger->error($currency);
+            $this->logger->debug(print_r($quote));
+            $this->logger->debug(print_r($currency));
             // if ($currency === 'AED' || $currency === 'SAR') {
                 if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
                     return true;
