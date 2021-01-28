@@ -72,10 +72,9 @@ class Cashew extends AbstractMethod
             $orderSubtotal = $quote->getSubtotal();
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
-            $this->logger->debug(print_r($quote));
-                if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
-                    return true;
-                }
+            if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
+                return true;
+            }
         }
 
         return false;
