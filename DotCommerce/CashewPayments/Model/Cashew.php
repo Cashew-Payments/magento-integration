@@ -71,7 +71,7 @@ class Cashew extends AbstractMethod
         if ($quote && ($quote instanceof MagentoQuote)) {
             $orderSubtotal = $quote->getSubtotal();
             $currency = $quote->getCurrency()->getCurrencyCode();
-            echo 'CURRENCY'.$currency.' '.$quote->getBaseCurrencyCode();
+            $this->logger->log('CURRENCY'.$currency.' '.$quote->getBaseCurrencyCode());
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
             if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
