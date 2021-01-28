@@ -5,9 +5,6 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <block class="DotCommerce\CashewPayments\Block\Checkout\View\CheckoutCashew" template="DotCommerce_CashewPayments::checkout.phtml" />
-    </head>
     <body>
         <referenceBlock name="checkout.root">
             <arguments>
@@ -46,5 +43,6 @@
                 </argument>
             </arguments>
         </referenceBlock>
+        <block class="DotCommerce\CashewPayments\Block\Checkout\View\CheckoutCashew" template="DotCommerce_CashewPayments::checkout.phtml" />
     </body>
 </page>
