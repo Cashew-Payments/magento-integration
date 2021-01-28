@@ -21,10 +21,10 @@
                 <field id="store_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
                     <label>Store Url</label>
                 </field>
-                <field id="environment_mode" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
+                <field id="environment_url" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
                     <label>Environment</label>
                     <source_model>DotCommerce\CashewPayments\Model\Source\Mode</source_model>
-                    <config_path>payment/cashewpayments/environment_mode</config_path>
+                    <config_path>payment/cashewpayments/environment_url</config_path>
                 </field>
                 <field id="api_key" translate="label" type="obscure" sortOrder="40" showInDefault="1" showInWebsite="1">
                     <label>API Key</label>

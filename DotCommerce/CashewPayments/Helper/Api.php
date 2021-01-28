@@ -115,7 +115,7 @@ class Api extends AbstractHelper
             'cashewSecretKey' => $this->config->apiKey(),
             'storeUrl' => $this->config->storeUrl()
         ];
-
+$this->logger->debug('APIDOMAIN: '.$this->config->apiDomain());
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
