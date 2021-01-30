@@ -122,7 +122,7 @@ class Api extends AbstractHelper
         $response = json_decode($this->curl->getBody(), true);
 
 
-        // $this->logger->debug(print_r($response,true));
+        $this->logger->debug(print_r($response,true));
         // $this->logger->debug('STATUS :: ' . $response['status']);
 
         if ($response['status'] === 'success') {
