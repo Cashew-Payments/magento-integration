@@ -69,11 +69,12 @@ class Cashew extends AbstractMethod
     public function isAvailable(CartInterface $quote = null): bool
     {
         if ($quote && ($quote instanceof MagentoQuote)) {
+            $allowedCurrencies = ['AED', 'SAR'];
             $orderSubtotal = $quote->getSubtotal();
             
             $minOrderTotal = !empty($this->config->getMinimumOrderTotal()) ? $this->config->getMinimumOrderTotal() : 0;
             $maxOrderTotal = !empty($this->config->getMaximumOrderTotal()) ? $this->config->getMaximumOrderTotal() : PHP_INT_MAX;
-            if ($quote->getBaseCurrencyCode() === 'AED') {
+            if (in_array($quote->getBaseCurrencyCode(), $allowedCurrencies)) {
                 if ($orderSubtotal >= $minOrderTotal && $orderSubtotal <= $maxOrderTotal) {
                     return true;
                 }

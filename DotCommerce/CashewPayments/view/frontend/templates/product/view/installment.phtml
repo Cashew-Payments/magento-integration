@@ -7,8 +7,11 @@
 /** @var $block DotCommerce\CashewPayments\Block\Product\View\Installment */
 ?>
 
-<?php if ($block->isEnabled() && 
-($block->getCurrency() === 'AED' || $block->getCurrency() === 'SAR') && 
+<?php 
+$allowedCurrencies = ['AED', 'SAR'];
+
+if ($block->isEnabled() && 
+in_array($block->getCurrency(), $allowedCurrencies) && 
 ($block->getLang() === 'en' || $block->getLang() === 'ar')): ?>
 
     <div id="cashew-widget" data-amount="<?= number_format($block->getPrice()) ?>" data-currency="<?= $block->getCurrency() ?>" data-language="<?= $block->getLang() ?>"></div>
