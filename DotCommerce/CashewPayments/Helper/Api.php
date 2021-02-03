@@ -116,15 +116,11 @@ class Api extends AbstractHelper
             'cashewSecretKey' => $this->config->apiKey(),
             'storeUrl' => $storeUrl
         ];
-        $this->logger->debug($storeUrl.' '.$this->config->apiKey());
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
         $response = json_decode($this->curl->getBody(), true);
 
-
-        $this->logger->debug(print_r($response,true));
-        // $this->logger->debug('STATUS :: ' . $response['status']);
 
         if ($response['status'] === 'success') {
             $token = $response['data']['token'];

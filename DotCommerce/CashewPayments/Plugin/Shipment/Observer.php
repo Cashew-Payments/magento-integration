@@ -28,14 +28,14 @@ class Observer implements ObserverInterface
     $order = $shipment->getOrder();
     $cashewPayment  = $order->getPayment()->getMethod();
     $this->logger->debug('Shippment: '.$cashewPayment);
-    $this->logger->debug(print_r($order));
+    $this->logger->debug(print_r($order,true));
     if ($cashewPayment == 'cashewpayment') {
         $token = $this->apiHelper->getToken();
         $data = [
             'orderStatus' => 'DISPATCHED'
         ];
-        $response = $this->apiHelper
-            ->postData($token, json_encode($data), self::API_POST);
+        // $response = $this->apiHelper
+        //     ->postData($token, json_encode($data), self::API_POST);
 
         if ($response['status'] !== 'success') {
             $this->logger->debug('Dispatch Errors:');
