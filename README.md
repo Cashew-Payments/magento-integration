@@ -19,7 +19,7 @@ Look for “Cashew Payments” in the list
 Enable extension
 Place API Key shared with you
 Save changes
-# 2c.
+# 2c. Create integration point
 Navigate to System > Integrations
 Add new integration
 Give a name
