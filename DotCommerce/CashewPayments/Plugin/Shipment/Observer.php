@@ -39,11 +39,11 @@ class Observer implements ObserverInterface
         // $response = $this->apiHelper
         //     ->postData($token, json_encode($data), self::API_POST);
 
-        if ($response['status'] !== 'success') {
-            $this->logger->debug('Dispatch Errors:');
-            $this->logger->debug(print_r(json_encode($response), true));
-        }
+        // if ($response['status'] !== 'success') {
+        //     $this->logger->debug('Dispatch Errors:');
+        //     $this->logger->debug(print_r(json_encode($response), true));
+        // }
     }
-    return $response;
+    // return $response;
   }
 }
