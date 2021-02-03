@@ -29,6 +29,7 @@ class Observer implements ObserverInterface
     $cashewPayment  = $order->getPayment()->getMethod();
     $this->logger->debug('Shippment: '.$cashewPayment);
     $this->logger->debug($order->getIncrementId());
+    $this->logger->debug(print_r($observer, true));
     if ($cashewPayment == 'cashewpayment') {
         $token = $this->apiHelper->getToken();
         $data = [
