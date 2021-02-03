@@ -1,4 +1,5 @@
 <?php
+
 namespace DotCommerce\CashewPayments\Plugin\Shipment;
 
 use Magento\Framework\Event\ObserverInterface;
@@ -6,9 +7,7 @@ use Magento\Framework\Event\ObserverInterface;
 use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
 
 use Psr\Log\LoggerInterface;
-
-class ProcessShipment implements ObserverInterface
-{
+class Observer {
     const API_POST = 'refunds/merchant';
 
     /**
@@ -18,18 +17,15 @@ class ProcessShipment implements ObserverInterface
      */
     protected $apiHelper;
     protected $logger;
-
-    /**
-     *
-     * @param \Magento\Framework\Event\Observer $observer
-     * @return $this
-     */
-    public function execute(\Magento\Framework\Event\Observer $observer, 
-    ApiHelper $apiHelper,
-    LoggerInterface $logger)
-    {
+    
+    public function __construct( 
+        ApiHelper $apiHelper,
+        LoggerInterface $logger
+    ) {
         $this->apiHelper = $apiHelper;
         $this->logger = $logger;
+    }
+    public function eventLogging(\Magento\Framework\Object $observer) {
         $shipment = $observer->getEvent()->getShipment();
         $order = $shipment->getOrder();
         $cashewPayment  = $order->getPayment()->getMethod();
