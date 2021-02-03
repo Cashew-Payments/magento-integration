@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 
 class Observer implements ObserverInterface
 {
-    const API_POST = 'refunds/merchant';
+    const API_POST = 'orders/status';
 
     protected $apiHelper;
     protected $logger;
@@ -27,7 +27,7 @@ class Observer implements ObserverInterface
     $shipment = $observer->getEvent()->getShipment();
     $order = $shipment->getOrder();
     $cashewPayment  = $order->getPayment()->getMethod();
-    $this->logger->debug('Shippment');
+    $this->logger->debug('Shippment: '.$cashewPayment);
     if ($cashewPayment == 'cashewpayment') {
         $token = $this->apiHelper->getToken();
         $data = [
