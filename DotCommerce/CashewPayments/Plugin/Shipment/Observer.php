@@ -24,12 +24,13 @@ class Observer implements ObserverInterface
 
   public function execute(\Magento\Framework\Event\Observer $observer)
   {
+
     $shipment = $observer->getEvent()->getShipment();
     $order = $shipment->getOrder();
     $cashewPayment  = $order->getPayment()->getMethod();
     $this->logger->debug('Shippment: '.$cashewPayment);
     $this->logger->debug($order->getIncrementId());
-    $this->logger->debug(print_r($observer->getEvent()->getTrack(), true));
+    $this->logger->debug($shipment);
     if ($cashewPayment == 'cashewpayment') {
         $token = $this->apiHelper->getToken();
         $data = [
