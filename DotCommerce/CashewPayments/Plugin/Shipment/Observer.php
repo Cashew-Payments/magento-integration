@@ -5,6 +5,9 @@ namespace DotCommerce\CashewPayments\Plugin\Shipment;
 use Magento\Framework\Event\ObserverInterface;
 
 use DotCommerce\CashewPayments\Helper\Api as ApiHelper;
+
+use Psr\Log\LoggerInterface;
+
 class Observer implements ObserverInterface
 {
     const API_POST = 'refunds/merchant';
@@ -13,7 +16,7 @@ class Observer implements ObserverInterface
     protected $logger;
 
   public function __construct(ApiHelper $apiHelper,
-  Psr\Log\LoggerInterface $logger)
+  LoggerInterface $logger)
   {
     $this->apiHelper = $apiHelper;
     $this->logger = $logger;
