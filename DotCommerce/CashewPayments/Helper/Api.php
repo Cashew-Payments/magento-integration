@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento 2 extension for Cashew Payments
  * 
@@ -148,7 +149,7 @@ class Api extends AbstractHelper
     public function checkout($orderId)
     {
         $order = $this->orderFactory->create()->load($orderId);
-        $this->logger->debug('shipping :: ' . print_r(($order->getShippingAddress()));
+        $this->logger->debug('shipping :: ' . print_r($order->getShippingAddress()));
         $shippingCountryName = $this->countryFactory
             ->create()
             ->loadByCode($order->getShippingAddress()->getCountryId())
@@ -159,143 +160,143 @@ class Api extends AbstractHelper
             ->getName();
 
         $orderData = [
-            'orderReference' => !empty($order->getIncrementId()) 
-            ? $order->getIncrementId() 
-            : null,
-            'totalAmount' => !empty($order->getGrandTotal()) 
-            ? (int)$order->getGrandTotal() 
-            : null,
-            'taxAmount' => !empty($order->getTaxAmount()) 
-            ? (int)$order->getTaxAmount() 
-            : null,
-            'currencyCode' => !empty($order->getBaseCurrencyCode()) 
-            ? $order->getBaseCurrencyCode() 
-            : null,
+            'orderReference' => !empty($order->getIncrementId())
+                ? $order->getIncrementId()
+                : null,
+            'totalAmount' => !empty($order->getGrandTotal())
+                ? (int)$order->getGrandTotal()
+                : null,
+            'taxAmount' => !empty($order->getTaxAmount())
+                ? (int)$order->getTaxAmount()
+                : null,
+            'currencyCode' => !empty($order->getBaseCurrencyCode())
+                ? $order->getBaseCurrencyCode()
+                : null,
             'shipping' => [
                 'reference' => null,
                 'name' => null,
                 'address' => [
-                    'firstName' => 
-                    !empty($order->getShippingAddress()->getFirstname()) 
-                    ? $order->getShippingAddress()->getFirstname() 
-                    : null,
-                    'lastName'          => 
-                    !empty($order->getShippingAddress()->getLastname()) 
-                    ? $order->getShippingAddress()->getLastname() 
-                    : null,
-                    'phone'             => 
-                    !empty($order->getShippingAddress()->getTelephone()) 
-                    ? $order->getShippingAddress()->getTelephone() 
-                    : 0,
+                    'firstName' =>
+                    !empty($order->getShippingAddress()->getFirstname())
+                        ? $order->getShippingAddress()->getFirstname()
+                        : null,
+                    'lastName'          =>
+                    !empty($order->getShippingAddress()->getLastname())
+                        ? $order->getShippingAddress()->getLastname()
+                        : null,
+                    'phone'             =>
+                    !empty($order->getShippingAddress()->getTelephone())
+                        ? $order->getShippingAddress()->getTelephone()
+                        : 0,
                     'alternatePhone'    => 0,
-                    'line1'             => 
-                    !empty($order->getShippingAddress()->getStreet()[0]) 
-                    ? $order->getShippingAddress()->getStreet()[0] 
-                    : null,
-                    'line2'             => 
-                    !empty($order->getShippingAddress()->getStreet()[1]) 
-                    ? $order->getShippingAddress()->getStreet()[1] 
-                    : null,
-                    'city'              => 
-                    !empty($order->getShippingAddress()->getCity()) 
-                    ? $order->getShippingAddress()->getCity() 
-                    : null,
-                    'state'             => 
-                    !empty($order->getShippingAddress()->getRegion()) 
-                    ? $order->getShippingAddress()->getRegion() 
-                    : null,
-                    'country'           => 
+                    'line1'             =>
+                    !empty($order->getShippingAddress()->getStreet()[0])
+                        ? $order->getShippingAddress()->getStreet()[0]
+                        : null,
+                    'line2'             =>
+                    !empty($order->getShippingAddress()->getStreet()[1])
+                        ? $order->getShippingAddress()->getStreet()[1]
+                        : null,
+                    'city'              =>
+                    !empty($order->getShippingAddress()->getCity())
+                        ? $order->getShippingAddress()->getCity()
+                        : null,
+                    'state'             =>
+                    !empty($order->getShippingAddress()->getRegion())
+                        ? $order->getShippingAddress()->getRegion()
+                        : null,
+                    'country'           =>
                     !empty($shippingCountryName)
-                    ? $shippingCountryName 
-                    : null,
-                    'postalCode'        => 
-                    !empty($order->getShippingAddress()->getPostcode()) 
-                    ? $order->getShippingAddress()->getPostcode() 
-                    : null
+                        ? $shippingCountryName
+                        : null,
+                    'postalCode'        =>
+                    !empty($order->getShippingAddress()->getPostcode())
+                        ? $order->getShippingAddress()->getPostcode()
+                        : null
                 ],
             ],
             'billingAddress'    => [
-                'firstName'         => 
-                !empty($order->getBillingAddress()->getFirstname()) 
-                ? $order->getBillingAddress()->getFirstname() : null,
-                'lastName'          => 
-                !empty($order->getBillingAddress()->getLastname()) 
-                ? $order->getBillingAddress()->getLastname() : null,
-                'phone'             => 
-                !empty($order->getBillingAddress()->getTelephone()) 
-                ? $order->getBillingAddress()->getTelephone() : null,
+                'firstName'         =>
+                !empty($order->getBillingAddress()->getFirstname())
+                    ? $order->getBillingAddress()->getFirstname() : null,
+                'lastName'          =>
+                !empty($order->getBillingAddress()->getLastname())
+                    ? $order->getBillingAddress()->getLastname() : null,
+                'phone'             =>
+                !empty($order->getBillingAddress()->getTelephone())
+                    ? $order->getBillingAddress()->getTelephone() : null,
                 'alternatePhone'    => 0,
-                'line1'             => 
-                !empty($order->getBillingAddress()->getStreet()[0]) 
-                ? $order->getBillingAddress()->getStreet()[0] : null,
-                'line2'             => 
-                !empty($order->getBillingAddress()->getStreet()[1]) 
-                ? $order->getBillingAddress()->getStreet()[1] : null,
-                'city'              => 
-                !empty($order->getBillingAddress()->getCity()) 
-                ? $order->getBillingAddress()->getCity() : null,
-                'state'             => 
-                !empty($order->getBillingAddress()->getRegion()) 
-                ? $order->getBillingAddress()->getRegion() : null,
-                'country'           => 
-                !empty($billingCountryName) 
-                ? $billingCountryName : null,
-                'postalCode'        => 
-                !empty($order->getBillingAddress()->getPostcode()) 
-                ? $order->getBillingAddress()->getPostcode() : null
+                'line1'             =>
+                !empty($order->getBillingAddress()->getStreet()[0])
+                    ? $order->getBillingAddress()->getStreet()[0] : null,
+                'line2'             =>
+                !empty($order->getBillingAddress()->getStreet()[1])
+                    ? $order->getBillingAddress()->getStreet()[1] : null,
+                'city'              =>
+                !empty($order->getBillingAddress()->getCity())
+                    ? $order->getBillingAddress()->getCity() : null,
+                'state'             =>
+                !empty($order->getBillingAddress()->getRegion())
+                    ? $order->getBillingAddress()->getRegion() : null,
+                'country'           =>
+                !empty($billingCountryName)
+                    ? $billingCountryName : null,
+                'postalCode'        =>
+                !empty($order->getBillingAddress()->getPostcode())
+                    ? $order->getBillingAddress()->getPostcode() : null
             ],
             'customer'          => [
-                'id'                => 
-                !empty($order->getCustomerId()) 
-                ? $order->getCustomerId() : null,
-                'mobileNumber'      => 
-                !empty($order->getShippingAddress()->getTelephone()) 
-                ? $order->getShippingAddress()->getTelephone() : null,
-                'email'             => 
-                !empty($order->getCustomerEmail()) 
-                ? $order->getCustomerEmail() : null,
-                'firstName'         => 
-                !empty($order->getCustomerFirstname()) 
-                ? $order->getCustomerFirstname() : null,
-                'lastName'          => 
-                !empty($order->getCustomerLastname()) 
-                ? $order->getCustomerLastname() : null,
-                'gender'            => 
-                !empty($order->getCustomerGender()) 
-                ? $order->getCustomerGender() : null,
-                'account'           => 
-                !empty($order->getCustomerId()) 
-                ? $order->getCustomerId() : null,
+                'id'                =>
+                !empty($order->getCustomerId())
+                    ? $order->getCustomerId() : null,
+                'mobileNumber'      =>
+                !empty($order->getShippingAddress()->getTelephone())
+                    ? $order->getShippingAddress()->getTelephone() : null,
+                'email'             =>
+                !empty($order->getCustomerEmail())
+                    ? $order->getCustomerEmail() : null,
+                'firstName'         =>
+                !empty($order->getCustomerFirstname())
+                    ? $order->getCustomerFirstname() : null,
+                'lastName'          =>
+                !empty($order->getCustomerLastname())
+                    ? $order->getCustomerLastname() : null,
+                'gender'            =>
+                !empty($order->getCustomerGender())
+                    ? $order->getCustomerGender() : null,
+                'account'           =>
+                !empty($order->getCustomerId())
+                    ? $order->getCustomerId() : null,
                 'dateOfBirth'       => null,
                 'dateJoined'        => null,
                 'defaultAddress'        => [
-                    'firstName'         => 
-                    !empty($order->getShippingAddress()->getFirstname()) 
-                    ? $order->getShippingAddress()->getFirstname() : null,
-                    'lastName'          => 
-                    !empty($order->getShippingAddress()->getLastname()) 
-                    ? $order->getShippingAddress()->getLastname() : null,
-                    'phone'             => 
-                    !empty($order->getShippingAddress()->getTelephone()) 
-                    ? $order->getShippingAddress()->getTelephone() : null,
+                    'firstName'         =>
+                    !empty($order->getShippingAddress()->getFirstname())
+                        ? $order->getShippingAddress()->getFirstname() : null,
+                    'lastName'          =>
+                    !empty($order->getShippingAddress()->getLastname())
+                        ? $order->getShippingAddress()->getLastname() : null,
+                    'phone'             =>
+                    !empty($order->getShippingAddress()->getTelephone())
+                        ? $order->getShippingAddress()->getTelephone() : null,
                     'alternatePhone'    => '',
-                    'line1'             => 
-                    !empty($order->getShippingAddress()->getStreet()[0]) 
-                    ? $order->getShippingAddress()->getStreet()[0] : null,
-                    'line2'             => 
-                    !empty($order->getShippingAddress()->getStreet()[1]) 
-                    ? $order->getShippingAddress()->getStreet()[1] : null,
-                    'city'              => 
-                    !empty($order->getShippingAddress()->getCity()) 
-                    ? $order->getShippingAddress()->getCity() : null,
-                    'state'             => 
-                    !empty($order->getShippingAddress()->getRegion()) 
-                    ? $order->getShippingAddress()->getRegion() : null,
-                    'country'           => 
+                    'line1'             =>
+                    !empty($order->getShippingAddress()->getStreet()[0])
+                        ? $order->getShippingAddress()->getStreet()[0] : null,
+                    'line2'             =>
+                    !empty($order->getShippingAddress()->getStreet()[1])
+                        ? $order->getShippingAddress()->getStreet()[1] : null,
+                    'city'              =>
+                    !empty($order->getShippingAddress()->getCity())
+                        ? $order->getShippingAddress()->getCity() : null,
+                    'state'             =>
+                    !empty($order->getShippingAddress()->getRegion())
+                        ? $order->getShippingAddress()->getRegion() : null,
+                    'country'           =>
                     !empty($shippingCountryName) ? $shippingCountryName : null,
-                    'postalCode'        => 
-                    !empty($order->getShippingAddress()->getPostcode()) 
-                    ? $order->getShippingAddress()->getPostcode() : null
+                    'postalCode'        =>
+                    !empty($order->getShippingAddress()->getPostcode())
+                        ? $order->getShippingAddress()->getPostcode() : null
                 ],
             ],
             'items'             => $this->getItems($orderId),
