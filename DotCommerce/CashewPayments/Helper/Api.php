@@ -149,12 +149,11 @@ class Api extends AbstractHelper
     public function checkout($orderId)
     {
         $order = $this->orderFactory->create()->load($orderId);
-        $this->logger->debug('shipping :: ' . print_r($order->getShippingAddress()));
-        $shippingCountryName = $this->countryFactory
+        $shippingCountryName = $order->getShippingAddress() == null ? '' : $this->countryFactory
             ->create()
             ->loadByCode($order->getShippingAddress()->getCountryId())
             ->getName();
-        $billingCountryName  = $this->countryFactory
+        $billingCountryName  = $order->getBillingAddress() == null ? '' : $this->countryFactory
             ->create()
             ->loadByCode($order->getBillingAddress()->getCountryId())
             ->getName();
