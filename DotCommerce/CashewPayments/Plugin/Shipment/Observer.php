@@ -10,7 +10,7 @@ use Psr\Log\LoggerInterface;
 
 class Observer implements ObserverInterface
 {
-    const API_POST = 'orders/status';
+    const API_POST = 'stores/magento/dispatch';
 
     protected $apiHelper;
     protected $logger;
@@ -31,10 +31,11 @@ class Observer implements ObserverInterface
     $this->logger->debug('Shippment: '.$cashewPayment);
     $this->logger->debug($order->getIncrementId());
     $this->logger->debug($order->getShipmentsCollection()->count());
+    $this->logger->debug($order->getShipmentsCollection()->count());
     if (1 == 2&&$cashewPayment == 'cashewpayment') {
         $token = $this->apiHelper->getToken();
         $data = [
-            'orderStatus' => 'DISPATCHED'
+            'orderReference' => $order->getIncrementId()
         ];
         // $response = $this->apiHelper
         //     ->postData($token, json_encode($data), self::API_POST);
