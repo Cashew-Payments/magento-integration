@@ -9,6 +9,7 @@ namespace DotCommerce\CashewPayments\Model\Source;
 
 /**
  * Class Mode
+ *
  * @package DotCommerce\CashewPayments\Model\Source
  */
 class Mode implements \Magento\Framework\Option\ArrayInterface

@@ -39,10 +39,12 @@ class Config extends AbstractHelper
 
     public function getEnvironment()
     {
-        return str_contains($this->scopeConfig->getValue(
-            self::ENVIRONMENT_URL,
-            ScopeInterface::SCOPE_WEBSITE
-        ), 'sandbox') ? 'sandbox' : 'production';
+        return str_contains(
+            $this->scopeConfig->getValue(
+                self::ENVIRONMENT_URL,
+                ScopeInterface::SCOPE_WEBSITE
+            ), 'sandbox'
+        ) ? 'sandbox' : 'production';
     }
 
     public function getMinimumOrderTotal()

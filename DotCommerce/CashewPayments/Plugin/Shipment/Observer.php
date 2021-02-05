@@ -15,36 +15,36 @@ class Observer implements ObserverInterface
     protected $apiHelper;
     protected $logger;
 
-  public function __construct(ApiHelper $apiHelper,
-  LoggerInterface $logger)
-  {
-    $this->apiHelper = $apiHelper;
-    $this->logger = $logger;
-  }
-
-  public function execute(\Magento\Framework\Event\Observer $observer)
-  {
-
-    $shipment = $observer->getEvent()->getShipment();
-    $order = $shipment->getOrder();
-    $cashewPayment  = $order->getPayment()->getMethod();
-    $this->logger->debug('Shippment: '.$cashewPayment);
-    $this->logger->debug($order->getIncrementId());
-    $this->logger->debug($order->getShipmentsCollection()->count());
-    $this->logger->debug($order->getShipmentsCollection()->count());
-    if (1 == 2&&$cashewPayment == 'cashewpayment') {
-        $token = $this->apiHelper->getToken();
-        $data = [
-            'orderReference' => $order->getIncrementId()
-        ];
-        // $response = $this->apiHelper
-        //     ->postData($token, json_encode($data), self::API_POST);
-
-        // if ($response['status'] !== 'success') {
-        //     $this->logger->debug('Dispatch Errors:');
-        //     $this->logger->debug(print_r(json_encode($response), true));
-        // }
+    public function __construct(ApiHelper $apiHelper,
+        LoggerInterface $logger
+    ) {
+        $this->apiHelper = $apiHelper;
+        $this->logger = $logger;
     }
-    // return $response;
-  }
+
+    public function execute(\Magento\Framework\Event\Observer $observer)
+    {
+
+        $shipment = $observer->getEvent()->getShipment();
+        $order = $shipment->getOrder();
+        $cashewPayment  = $order->getPayment()->getMethod();
+        $this->logger->debug('Shippment: '.$cashewPayment);
+        $this->logger->debug($order->getIncrementId());
+        $this->logger->debug($order->getShipmentsCollection()->count());
+        $this->logger->debug($order->getShipmentsCollection()->count());
+        if (1 == 2&&$cashewPayment == 'cashewpayment') {
+            $token = $this->apiHelper->getToken();
+            $data = [
+            'orderReference' => $order->getIncrementId()
+            ];
+            // $response = $this->apiHelper
+            //     ->postData($token, json_encode($data), self::API_POST);
+
+            // if ($response['status'] !== 'success') {
+            //     $this->logger->debug('Dispatch Errors:');
+            //     $this->logger->debug(print_r(json_encode($response), true));
+            // }
+        }
+        // return $response;
+    }
 }
