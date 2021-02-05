@@ -149,9 +149,10 @@ class Api extends AbstractHelper
     public function checkout($orderId)
     {
         $order = $this->orderFactory->create()->load($orderId);
+        $shippingAddress = $order->getShippingAddress() == null ? $order->getBillingAddress() : $order->getShippingAddress() == null;
         $shippingCountryName = $order->getShippingAddress() == null ? '' : $this->countryFactory
             ->create()
-            ->loadByCode($order->getShippingAddress()->getCountryId())
+            ->loadByCode($shippingAddress->getCountryId())
             ->getName();
         $billingCountryName  = $order->getBillingAddress() == null ? '' : $this->countryFactory
             ->create()
@@ -176,41 +177,41 @@ class Api extends AbstractHelper
                 'name' => null,
                 'address' => [
                     'firstName' =>
-                    !empty($order->getShippingAddress()->getFirstname())
-                        ? $order->getShippingAddress()->getFirstname()
+                    !empty($shippingAddress->getFirstname())
+                        ? $shippingAddress->getFirstname()
                         : null,
                     'lastName'          =>
-                    !empty($order->getShippingAddress()->getLastname())
-                        ? $order->getShippingAddress()->getLastname()
+                    !empty($shippingAddress->getLastname())
+                        ? $shippingAddress->getLastname()
                         : null,
                     'phone'             =>
-                    !empty($order->getShippingAddress()->getTelephone())
-                        ? $order->getShippingAddress()->getTelephone()
+                    !empty($shippingAddress->getTelephone())
+                        ? $shippingAddress->getTelephone()
                         : 0,
                     'alternatePhone'    => 0,
                     'line1'             =>
-                    !empty($order->getShippingAddress()->getStreet()[0])
-                        ? $order->getShippingAddress()->getStreet()[0]
+                    !empty($shippingAddress->getStreet()[0])
+                        ? $shippingAddress->getStreet()[0]
                         : null,
                     'line2'             =>
-                    !empty($order->getShippingAddress()->getStreet()[1])
-                        ? $order->getShippingAddress()->getStreet()[1]
+                    !empty($shippingAddress->getStreet()[1])
+                        ? $shippingAddress->getStreet()[1]
                         : null,
                     'city'              =>
-                    !empty($order->getShippingAddress()->getCity())
-                        ? $order->getShippingAddress()->getCity()
+                    !empty($shippingAddress->getCity())
+                        ? $shippingAddress->getCity()
                         : null,
                     'state'             =>
-                    !empty($order->getShippingAddress()->getRegion())
-                        ? $order->getShippingAddress()->getRegion()
+                    !empty($shippingAddress->getRegion())
+                        ? $shippingAddress->getRegion()
                         : null,
                     'country'           =>
                     !empty($shippingCountryName)
                         ? $shippingCountryName
                         : null,
                     'postalCode'        =>
-                    !empty($order->getShippingAddress()->getPostcode())
-                        ? $order->getShippingAddress()->getPostcode()
+                    !empty($shippingAddress->getPostcode())
+                        ? $shippingAddress->getPostcode()
                         : null
                 ],
             ],
@@ -249,8 +250,8 @@ class Api extends AbstractHelper
                 !empty($order->getCustomerId())
                     ? $order->getCustomerId() : null,
                 'mobileNumber'      =>
-                !empty($order->getShippingAddress()->getTelephone())
-                    ? $order->getShippingAddress()->getTelephone() : null,
+                !empty($shippingAddress->getTelephone())
+                    ? $shippingAddress->getTelephone() : null,
                 'email'             =>
                 !empty($order->getCustomerEmail())
                     ? $order->getCustomerEmail() : null,
@@ -270,32 +271,32 @@ class Api extends AbstractHelper
                 'dateJoined'        => null,
                 'defaultAddress'        => [
                     'firstName'         =>
-                    !empty($order->getShippingAddress()->getFirstname())
-                        ? $order->getShippingAddress()->getFirstname() : null,
+                    !empty($shippingAddress->getFirstname())
+                        ? $shippingAddress->getFirstname() : null,
                     'lastName'          =>
-                    !empty($order->getShippingAddress()->getLastname())
-                        ? $order->getShippingAddress()->getLastname() : null,
+                    !empty($shippingAddress->getLastname())
+                        ? $shippingAddress->getLastname() : null,
                     'phone'             =>
-                    !empty($order->getShippingAddress()->getTelephone())
-                        ? $order->getShippingAddress()->getTelephone() : null,
+                    !empty($shippingAddress->getTelephone())
+                        ? $shippingAddress->getTelephone() : null,
                     'alternatePhone'    => '',
                     'line1'             =>
-                    !empty($order->getShippingAddress()->getStreet()[0])
-                        ? $order->getShippingAddress()->getStreet()[0] : null,
+                    !empty($shippingAddress->getStreet()[0])
+                        ? $shippingAddress->getStreet()[0] : null,
                     'line2'             =>
-                    !empty($order->getShippingAddress()->getStreet()[1])
-                        ? $order->getShippingAddress()->getStreet()[1] : null,
+                    !empty($shippingAddress->getStreet()[1])
+                        ? $shippingAddress->getStreet()[1] : null,
                     'city'              =>
-                    !empty($order->getShippingAddress()->getCity())
-                        ? $order->getShippingAddress()->getCity() : null,
+                    !empty($shippingAddress->getCity())
+                        ? $shippingAddress->getCity() : null,
                     'state'             =>
-                    !empty($order->getShippingAddress()->getRegion())
-                        ? $order->getShippingAddress()->getRegion() : null,
+                    !empty($shippingAddress->getRegion())
+                        ? $shippingAddress->getRegion() : null,
                     'country'           =>
                     !empty($shippingCountryName) ? $shippingCountryName : null,
                     'postalCode'        =>
-                    !empty($order->getShippingAddress()->getPostcode())
-                        ? $order->getShippingAddress()->getPostcode() : null
+                    !empty($shippingAddress->getPostcode())
+                        ? $shippingAddress->getPostcode() : null
                 ],
             ],
             'items'             => $this->getItems($orderId),
