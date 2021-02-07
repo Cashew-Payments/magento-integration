@@ -87,10 +87,14 @@ class Refund
         CreditmemoRepositoryInterface $subject,
         $result
     ) {
+        $refundId = $result->getIncrementId();
+        $refundedOrder  = $subject->get($refundId)->getOrder();
+        $refundedAmount = $subject->get($refundId)->getGrandTotal();
         $orderId = $refundedOrder->getIncrementId();
-        $refundedOrder  = $subject->get($orderId)->getOrder();
-        $refundedAmount = $subject->get($orderId)->getGrandTotal();
         $cashewPayment  = $refundedOrder->getPayment()->getMethod();
+        $this->logger->debug('Payment method: ' . $cashewPayment);
+        $this->logger->debug('Order Id: ' . $orderId);
+        $this->logger->debug('Refund Id: ' . $refundId);
         if ($cashewPayment == 'cashewpayment') {
             $data = [
                 'orderReference' => $orderId,
