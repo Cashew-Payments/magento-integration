@@ -120,6 +120,8 @@ class Api extends AbstractHelper
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
+        $this->logger->debug('TOKEN :: ' . print_r($headers, true));
+
         $response = json_decode($this->curl->getBody(), true);
 
         $this->logger->debug('TOKEN :: ' . print_r($response, true));
