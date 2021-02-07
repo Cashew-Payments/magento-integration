@@ -92,9 +92,6 @@ class Refund
         $refundedAmount = $subject->get($refundId)->getGrandTotal();
         $orderId = $refundedOrder->getIncrementId();
         $cashewPayment  = $refundedOrder->getPayment()->getMethod();
-        $this->logger->debug('Payment method: ' . $cashewPayment);
-        $this->logger->debug('Order Id: ' . $orderId);
-        $this->logger->debug('Refund Id: ' . $refundId);
         if ($cashewPayment == 'cashewpayment') {
             $data = [
                 'orderReference' => $orderId,
