@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento 2 extension for Cashew Payments
  * Action to send details to cashew once a refund is issued
@@ -50,7 +51,7 @@ class Refund
      */
     protected $logger;
 
-    
+
     /**
      * Magento 2 extension for Cashew Payments
      * 
@@ -90,7 +91,7 @@ class Refund
         $refundedOrder  = $subject->get($orderId)->getOrder();
         $refundedAmount = $subject->get($orderId)->getGrandTotal();
         $cashewPayment  = $refundedOrder->getPayment()->getMethod();
-        
+        $this->logger->debug(print_r($result));
         if ($cashewPayment == 'cashewpayment') {
             $data = [
                 'orderReference' => $orderId,
