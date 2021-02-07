@@ -122,10 +122,10 @@ class Api extends AbstractHelper
 
         $response = json_decode($this->curl->getBody(), true);
 
-
+        $this->logger->debug('TOKEN :: ' . print_r($response, true));
         if ($response['status'] === 'success') {
             $token = $response['data']['token'];
-            // $this->logger->debug('TOKEN :: ' . $token);
+            $this->logger->debug('TOKEN :: ' . $token);
 
             return $token;
         }
