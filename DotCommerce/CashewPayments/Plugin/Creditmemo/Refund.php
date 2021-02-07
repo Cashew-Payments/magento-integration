@@ -91,9 +91,8 @@ class Refund
         $refundedOrder  = $subject->get($orderId)->getOrder();
         $refundedAmount = $subject->get($orderId)->getGrandTotal();
         $cashewPayment  = $refundedOrder->getPayment()->getMethod();
-        $this->logger->debug('ORDER ID: ' . $result->getOrderItemId());
-        $this->logger->debug('PARENT ID: ' . $result->getParentId());
-        $this->logger->debug('PRODUCT ID: ' . $result->getProductId());
+        $this->logger->debug('Payment method: ' . $cashewPayment);
+        $this->logger->debug('Order Id: ' . $refundedOrder->getIncrementId());
         if ($cashewPayment == 'cashewpayment') {
             $data = [
                 'orderReference' => $orderId,
