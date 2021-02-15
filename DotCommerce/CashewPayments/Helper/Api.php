@@ -151,7 +151,7 @@ class Api extends AbstractHelper
     public function checkout($orderId)
     {
         $order = $this->orderFactory->create()->load($orderId);
-        $shippingAddress = $order->getShippingAddress() == null ? $order->getBillingAddress() : $order->getShippingAddress() == null;
+        $shippingAddress = $order->getShippingAddress() == null ? $order->getBillingAddress() : $order->getShippingAddress();
         $shippingCountryName = $order->getShippingAddress() == null ? '' : $this->countryFactory
             ->create()
             ->loadByCode($shippingAddress->getCountryId())
