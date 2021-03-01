@@ -1,16 +1,9 @@
-define(
-    [
-        'Magento_Checkout/js/view/payment/default'
-    ],
-    function (Component) {
-        'use strict';
+define(["Magento_Checkout/js/view/payment/default"], function (Component) {
+  "use strict";
 
-        return Component.extend(
-            {
-                defaults: {
-                    template: 'DotCommerce_CashewPayments/payment/cashew'
-                }
-            }
-        );
-    }
-);
+  return Component.extend({
+    defaults: {
+      template: "DotCommerce_CashewPayments/payment/cashew",
+    },
+  });
+});
