@@ -361,14 +361,22 @@ class Api extends AbstractHelper
         $store = $this->storeManager->getStore();
         $dataItems = [];
 
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
         foreach ($orderDetails->getItemsCollection() as $item) {
             $product = $this->productRepository->getById($item->getProductId());
+            $_product = $objectManager->get('Magento\Catalog\Model\Product')->load($item->getProductId());
+
+            $imageHelper  = $objectManager->get('\Magento\Catalog\Helper\Image');
+
+            $image_url = $imageHelper->init($_product, 'product_page_image_small')->setImageFile($_product->getImage())->resize(162, 162)->getUrl();
+
             $dataItem = [
                 'reference' => $item->getSku(),
                 'name' => $item->getName(),
                 'description' => $item->getDescription(),
                 'url' => $product->getProductUrl(),
-                'image' => $store->getBaseUrl($this->url::URL_TYPE_MEDIA) . 'catalog/product' . $product->getImage(),
+                'image' => $image_url,
                 'unitPrice' => $item->getPrice(),
                 'quantity' => (int)$item->getqty_ordered()
             ];
