@@ -1,5 +1,5 @@
 # cashew extension for Magento
-Version 1.0.10
+Version 1.0.11
 
 # Magento
 This extension allows you to use cashew as a payment gateway in your Magento store.
