@@ -35,7 +35,7 @@ define(
                     var emailValidationResult = customer.isLoggedIn();
                     var loginFormSelector = 'form[data-role=email-with-possible-login]';
 
-                    if (cashew.checkout.response.orderId) {
+                    if (this.item.method == 'cashewpayment' && cashew.checkout.response.orderId) {
                         cashew.checkout.load();
                         return false;
                     }
