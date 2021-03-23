@@ -41,7 +41,7 @@ define(
                     } else {
                         document.getElementById('cashewpayment')
                         .parentElement
-                        .parentElement.querySelector('.checkout').classList.remove('disabled');
+                        .parentElement.querySelector('.disabled').classList.remove('disabled');
                     }
                     
                     if (!customer.isLoggedIn()) {
