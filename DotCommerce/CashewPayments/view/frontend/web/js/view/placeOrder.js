@@ -30,10 +30,20 @@ define(
                     if (event) {
                         event.preventDefault();
                     }
-                    var self = this,
-                    placeOrder,
-                    emailValidationResult = customer.isLoggedIn(),
-                    loginFormSelector = 'form[data-role=email-with-possible-login]';
+                    var self = this;
+                    var placeOrder;
+                    var emailValidationResult = customer.isLoggedIn();
+                    var loginFormSelector = 'form[data-role=email-with-possible-login]';
+
+                    if (cashew.checkout.response.orderId) {
+                        cashew.checkout.load();
+                        return false;
+                    } else {
+                        document.getElementById('cashewpayment')
+                        .parentElement
+                        .parentElement.querySelector('.checkout').classList.remove('disabled');
+                    }
+                    
                     if (!customer.isLoggedIn()) {
                         $(loginFormSelector).validation();
                         emailValidationResult = Boolean($(loginFormSelector + ' input[name=username]').valid());
