@@ -38,10 +38,6 @@ define(
                     if (cashew.checkout.response.orderId) {
                         cashew.checkout.load();
                         return false;
-                    } else {
-                        document.getElementById('cashewpayment')
-                        .parentElement
-                        .parentElement.querySelector('.disabled').classList.remove('disabled');
                     }
                     
                     if (!customer.isLoggedIn()) {
@@ -88,6 +84,10 @@ define(
                                 }
                             }
                         );
+
+                        document.getElementById('cashewpayment')
+                        .parentElement
+                        .parentElement.querySelector('.disabled').classList.remove('disabled');
                     } else {
                         window.location = BASE_URL + 'checkout/onepage/success';
                     }
