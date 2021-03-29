@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Magento 2 extension for Cashew Payments
+ */
+?>
+<?php 
+$allowedCurrencies = ['AED', 'SAR'];
+
+if ($block->isEnabled() && 
+in_array($block->getCurrency(), $allowedCurrencies) && 
+($block->getLang() === 'en' || $block->getLang() === 'ar')): ?>
+<script src="<?= $block->getEnvironment() ?>widgets/magento.cart.min.js"></script>
+<?php endif; ?>
