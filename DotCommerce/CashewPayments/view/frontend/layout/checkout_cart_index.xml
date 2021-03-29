@@ -7,7 +7,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="checkout.cart.totals.container">
-            <block class="DotCommerce\CashewPayments\Block\CheckoutCashew" name="cashew.cart.widget" after="-" template="DotCommerce_CashewPayments::cart/view/installments.phtml"/>
+            <block class="DotCommerce\CashewPayments\Block\CheckoutCashew" name="cashew.cart.widget" after="-" template="DotCommerce_CashewPayments::cart/view/installment.phtml"/>
         </referenceContainer>
     </body>
 </page>
