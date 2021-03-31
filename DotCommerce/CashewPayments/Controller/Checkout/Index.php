@@ -77,7 +77,7 @@ class Index extends Action
     public function execute()
     {
         $orderId = $this->_request->getParam('orderId');
-        $this->logger->debug('PARAMS :: ' . print_r($this->_request, true));
+        $this->logger->debug('PARAMS :: ' . print_r($this->_request->getProperties(), true));
         if ($orderId) {
             $order = $this->orderFactory->create();
             $order->load($orderId);
