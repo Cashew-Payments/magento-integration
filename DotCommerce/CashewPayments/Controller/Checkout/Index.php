@@ -92,7 +92,7 @@ class Index extends Action
         } else {
             $response = $this->resultRawFactory->create()
                 ->setHeader('Content-type', 'application/json')
-                ->setContents(json_encode($this->_request->getProperties()));
+                ->setContents(json_encode([]));
             return $response;
         }
     }

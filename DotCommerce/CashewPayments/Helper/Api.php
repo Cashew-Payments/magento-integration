@@ -112,7 +112,7 @@ class Api extends AbstractHelper
      */
     public function getToken()
     {
-        $storeUrl = $this->storeManager->getStore()->getBaseUrl();
+        $storeUrl = $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
         $headers = [
             'cashewSecretKey' => $this->config->apiKey(),
             'storeUrl' => $storeUrl
@@ -120,11 +120,11 @@ class Api extends AbstractHelper
         $this->curl->setHeaders($headers);
         $this->curl->post($this->config->apiDomain() . '' . self::API_TOKEN, []);
 
-        $this->logger->debug('TOKEN :: ' . print_r($headers, true));
+        // $this->logger->debug('TOKEN :: ' . print_r($headers, true));
 
         $response = json_decode($this->curl->getBody(), true);
 
-        $this->logger->debug('TOKEN :: ' . print_r($response, true));
+        // $this->logger->debug('TOKEN :: ' . print_r($response, true));
         if ($response['status'] === 'success') {
             $token = $response['data']['token'];
             $this->logger->debug('TOKEN :: ' . $token);
