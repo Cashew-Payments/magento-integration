@@ -40,9 +40,6 @@ class Index extends Action
     protected $resultRawFactory;
     protected $apiHelper;
     protected $orderFactory;
-
-    protected $logger;
-
     
     /**
      * Magento 2 extension for Cashew Payments
@@ -63,13 +60,11 @@ class Index extends Action
         Context $context,
         ResultRawFactory $resultRawFactory,
         ApiHelper $apiHelper,
-        Logger $logger,
         \Magento\Sales\Model\OrderFactory $orderFactory
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->apiHelper = $apiHelper;
         $this->orderFactory = $orderFactory;
-        $this->logger = $logger;
 
         parent::__construct($context);
     }
@@ -77,7 +72,6 @@ class Index extends Action
     public function execute()
     {
         $orderId = $this->_request->getParam('orderId');
-        $this->logger->debug('PARAMS :: ' . print_r($this->_request->getProperties(), true));
         if ($orderId) {
             $order = $this->orderFactory->create();
             $order->load($orderId);
@@ -98,7 +92,7 @@ class Index extends Action
         } else {
             $response = $this->resultRawFactory->create()
                 ->setHeader('Content-type', 'application/json')
-                ->setContents(json_encode([]));
+                ->setContents(json_encode($this->_request->getProperties()));
             return $response;
         }
     }
