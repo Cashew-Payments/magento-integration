@@ -20,6 +20,7 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\RawFactory as ResultRawFactory;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\OrderFactory;
+use Psr\Log\LoggerInterface as Logger;
 
 /**
  * Magento 2 extension for Cashew Payments
@@ -39,6 +40,8 @@ class Index extends Action
     protected $resultRawFactory;
     protected $apiHelper;
     protected $orderFactory;
+
+    protected $logger;
 
     
     /**
@@ -60,11 +63,13 @@ class Index extends Action
         Context $context,
         ResultRawFactory $resultRawFactory,
         ApiHelper $apiHelper,
+        Logger $logger,
         \Magento\Sales\Model\OrderFactory $orderFactory
     ) {
         $this->resultRawFactory = $resultRawFactory;
         $this->apiHelper = $apiHelper;
         $this->orderFactory = $orderFactory;
+        $this->logger = $logger;
 
         parent::__construct($context);
     }
@@ -72,7 +77,7 @@ class Index extends Action
     public function execute()
     {
         $orderId = $this->_request->getParam('orderId');
-
+        $this->logger->debug('PARAMS :: ' . print_r($this->_request, true));
         if ($orderId) {
             $order = $this->orderFactory->create();
             $order->load($orderId);
