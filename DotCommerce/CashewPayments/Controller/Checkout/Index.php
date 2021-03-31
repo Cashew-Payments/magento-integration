@@ -90,6 +90,11 @@ class Index extends Action
 
                 return $response;
             }
+        } else {
+            $response = $this->resultRawFactory->create()
+                ->setHeader('Content-type', 'application/json')
+                ->setContents(json_encode([]));
+            return $response;
         }
     }
 }
