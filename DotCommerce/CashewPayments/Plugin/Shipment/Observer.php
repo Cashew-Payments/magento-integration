@@ -35,7 +35,8 @@ class Observer implements ObserverInterface
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
             $data = [
-            'orderReference' => $order->getIncrementId()
+            'orderReference' => $order->getIncrementId(),
+            'entity' => $order->getEntityId()
             ];
             $response = $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
