@@ -24,7 +24,6 @@ class Observer implements ObserverInterface
 
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-
         $shipment = $observer->getEvent()->getShipment();
         $order = $shipment->getOrder();
         $cashewPayment  = $order->getPayment()->getMethod();
@@ -32,11 +31,22 @@ class Observer implements ObserverInterface
         $this->logger->debug('Entity ID: '.$order->getEntityId());
         $this->logger->debug('Payment Method: '.$cashewPayment);
         $this->logger->debug('Shippments count: '.$order->getShipmentsCollection()->count());
+
+        $shipmentObj = $observer->getEvent()->getShipment();
+
+        foreach ($shipmentObj->getItemsCollection() as $item) {    
+            $this->logger->debug('item: '.print_r(json_encode($item), true));
+        }
+
+
+
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
             $data = [
             'orderReference' => $order->getIncrementId(),
-            'entityId' => $order->getEntityId()
+            'entityId' => $order->getEntityId(),
+            'numShippedItems' => [
+            ]
             ];
             $response = $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
