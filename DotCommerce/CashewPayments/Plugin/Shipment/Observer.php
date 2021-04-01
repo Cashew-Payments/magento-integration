@@ -28,17 +28,17 @@ class Observer implements ObserverInterface
         $shipment = $observer->getEvent()->getShipment();
         $order = $shipment->getOrder();
         $cashewPayment  = $order->getPayment()->getMethod();
-        $this->logger->debug('Increment ID: ' . $order->getIncrementId());
-        $this->logger->debug('Entity ID: ' . $order->getEntityId());
-        $this->logger->debug('Payment Method: ' . $cashewPayment);
-        $this->logger->debug('Shippments count: ' . $order->getShipmentsCollection()->count());
+        // $this->logger->debug('Increment ID: ' . $order->getIncrementId());
+        // $this->logger->debug('Entity ID: ' . $order->getEntityId());
+        // $this->logger->debug('Payment Method: ' . $cashewPayment);
+        // $this->logger->debug('Shippments count: ' . $order->getShipmentsCollection()->count());
 
         $shipmentObj = $observer->getEvent()->getShipment();
         $numShippedItems = [];
 
         foreach ($shipmentObj->getItemsCollection() as $orderItem) {
             if (!$orderItem->getParentItem()) {
-                $this->logger->debug('id: ' . $orderItem->getSku() . ' Quantity: ' . $orderItem->getQty());
+                // $this->logger->debug('id: ' . $orderItem->getSku() . ' Quantity: ' . $orderItem->getQty());
 
                 $dataItem = [
                     'reference' => $orderItem->getSku(),
@@ -47,8 +47,6 @@ class Observer implements ObserverInterface
                 $numShippedItems[] = $dataItem;
             }
         }
-
-
 
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
