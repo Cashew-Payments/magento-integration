@@ -30,6 +30,8 @@ class Observer implements ObserverInterface
         $cashewPayment  = $order->getPayment()->getMethod();
         $this->logger->debug('Shippment: '.$cashewPayment);
         $this->logger->debug($order->getIncrementId());
+        $this->logger->debug($order->getEntityId());
+        $this->logger->debug($cashewPayment);
         $this->logger->debug($order->getShipmentsCollection()->count());
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
@@ -42,6 +44,9 @@ class Observer implements ObserverInterface
 
             if ($response['status'] !== 'success') {
                 $this->logger->debug('Dispatch Errors:');
+                $this->logger->debug(print_r(json_encode($response), true));
+            } else {
+                $this->logger->debug('Dispatch Success:');
                 $this->logger->debug(print_r(json_encode($response), true));
             }
         }
