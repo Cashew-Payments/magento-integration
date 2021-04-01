@@ -36,7 +36,6 @@ class Observer implements ObserverInterface
         $shipmentObj = $observer->getEvent()->getShipment();
 
         foreach ($shipmentObj->getItemsCollection() as $orderItem) {
-            $this->logger->debug('Collection: ' . var_dump($orderItem));
             if (!$orderItem->getParentItem()) {
                 $qty = $orderItem->getQtyOrdered();
                 $this->logger->debug('Max: ' . $orderItem->getTotalQty());
