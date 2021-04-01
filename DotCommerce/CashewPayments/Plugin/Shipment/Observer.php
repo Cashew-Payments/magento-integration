@@ -28,11 +28,10 @@ class Observer implements ObserverInterface
         $shipment = $observer->getEvent()->getShipment();
         $order = $shipment->getOrder();
         $cashewPayment  = $order->getPayment()->getMethod();
-        $this->logger->debug('Shippment: '.$cashewPayment);
-        $this->logger->debug($order->getIncrementId());
-        $this->logger->debug($order->getEntityId());
-        $this->logger->debug($cashewPayment);
-        $this->logger->debug($order->getShipmentsCollection()->count());
+        $this->logger->debug('Increment ID: '.$order->getIncrementId());
+        $this->logger->debug('Entity ID: '.$order->getEntityId());
+        $this->logger->debug('Payment Method: '.$cashewPayment);
+        $this->logger->debug('Shippments count: '.$order->getShipmentsCollection()->count());
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
             $data = [
