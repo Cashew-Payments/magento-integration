@@ -32,8 +32,8 @@ class Observer implements ObserverInterface
         $this->logger->debug('Entity ID: ' . $order->getEntityId());
         $this->logger->debug('Payment Method: ' . $cashewPayment);
         $this->logger->debug('Shippments count: ' . $order->getShipmentsCollection()->count());
-        $this->logger->debug('Object: ' . print_r($shipment->getAllItems(), true));
-        $this->logger->debug('Collection: ' . print_r($shipment->getItemsCollection(), true));
+        $this->logger->debug('Object: ' . var_dump($shipment->getAllItems()));
+        $this->logger->debug('Collection: ' . var_dump($shipment->getItemsCollection()));
 
         $shipmentObj = $observer->getEvent()->getShipment();
 
