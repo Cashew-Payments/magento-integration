@@ -31,12 +31,11 @@ class Observer implements ObserverInterface
         $this->logger->debug('Shippment: '.$cashewPayment);
         $this->logger->debug($order->getIncrementId());
         $this->logger->debug($order->getShipmentsCollection()->count());
-        $this->logger->debug($order->getShipmentsCollection()->count());
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
             $data = [
             'orderReference' => $order->getIncrementId(),
-            'entity' => $order->getEntityId()
+            'entityId' => $order->getEntityId()
             ];
             $response = $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
