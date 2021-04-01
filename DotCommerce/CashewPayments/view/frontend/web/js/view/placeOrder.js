@@ -85,9 +85,15 @@ define(
                             }
                         );
 
-                        document.getElementById('cashewpayment')
-                        .parentElement
-                        .parentElement.querySelector('.disabled').classList.remove('disabled');
+                        if (document.getElementById('cashewpayment').parentElement.parentElement.querySelector('.disabled')) {
+                            document.getElementById('cashewpayment')
+                            .parentElement
+                            .parentElement.querySelector('.disabled').classList.remove('disabled');
+                        }
+
+                        if (document.getElementById('onestepcheckout-button-place-order')) {
+                            document.getElementById('onestepcheckout-button-place-order').disabled = true;
+                        } 
                     } else {
                         window.location = BASE_URL + 'checkout/onepage/success';
                     }

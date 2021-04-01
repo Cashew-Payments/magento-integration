@@ -32,19 +32,19 @@ class Observer implements ObserverInterface
         $this->logger->debug($order->getIncrementId());
         $this->logger->debug($order->getShipmentsCollection()->count());
         $this->logger->debug($order->getShipmentsCollection()->count());
-        if (1 == 2&&$cashewPayment == 'cashewpayment') {
+        if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
             $data = [
             'orderReference' => $order->getIncrementId()
             ];
-            // $response = $this->apiHelper
-            //     ->postData($token, json_encode($data), self::API_POST);
+            $response = $this->apiHelper
+                ->postData($token, json_encode($data), self::API_POST);
 
-            // if ($response['status'] !== 'success') {
-            //     $this->logger->debug('Dispatch Errors:');
-            //     $this->logger->debug(print_r(json_encode($response), true));
-            // }
+            if ($response['status'] !== 'success') {
+                $this->logger->debug('Dispatch Errors:');
+                $this->logger->debug(print_r(json_encode($response), true));
+            }
         }
-        // return $response;
+        return $response;
     }
 }
