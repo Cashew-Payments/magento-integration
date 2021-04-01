@@ -37,7 +37,7 @@ class Observer implements ObserverInterface
         foreach ($shipmentObj->getItemsCollection() as $orderItem) {    
             if (!$orderItem->getParentItem()) {
                 $qty = $orderItem->getQtyOrdered();
-                $this->logger->debug('Max: '.max($orderItem->getQtyShipped(), $orderItem->getQtyInvoiced()));
+                $this->logger->debug('Max: '.$orderItem->getQtyShipped().' '. $orderItem->getQtyInvoiced());
                 if (!$order->getReordered()) {
                     $qty -= max($orderItem->getQtyShipped(), $orderItem->getQtyInvoiced());
                 }
