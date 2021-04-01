@@ -34,10 +34,17 @@ class Observer implements ObserverInterface
         $this->logger->debug('Shippments count: ' . $order->getShipmentsCollection()->count());
 
         $shipmentObj = $observer->getEvent()->getShipment();
+        $numShippedItems = [];
 
         foreach ($shipmentObj->getItemsCollection() as $orderItem) {
             if (!$orderItem->getParentItem()) {
-                $this->logger->debug('id: ' . $orderItem->getId() . ' EntityId: ' . $orderItem->getEntityId() . ' Quantity: ' . $orderItem->getQty());
+                $this->logger->debug('id: ' . $orderItem->getSku() . ' Quantity: ' . $orderItem->getQty());
+
+                $dataItem = [
+                    'reference' => $orderItem->getSku(),
+                    'qty_shipped' => $orderItem->getQty(),
+                ];
+                $numShippedItems[] = $dataItem;
             }
         }
 
@@ -48,7 +55,7 @@ class Observer implements ObserverInterface
             $data = [
                 'orderReference' => $order->getIncrementId(),
                 'entityId' => $order->getEntityId(),
-                'numShippedItems' => []
+                'numShippedItems' => $numShippedItems
             ];
             $response = $this->apiHelper
                 ->postData($token, json_encode($data), self::API_POST);
