@@ -37,7 +37,7 @@ class Observer implements ObserverInterface
 
         foreach ($shipmentObj->getItemsCollection() as $orderItem) {
             if (!$orderItem->getParentItem()) {
-                $this->logger->debug('Quantity: ' . $orderItem->getQty());
+                $this->logger->debug('id: ' . $orderItem->getId() . ' EntityId: ' . $orderItem->getEntityId() . ' Quantity: ' . $orderItem->getQty());
             }
         }
 
