@@ -40,7 +40,7 @@ class Observer implements ObserverInterface
                 if (!$order->getReordered()) {
                     $qty -= max($orderItem->getQtyShipped(), $orderItem->getQtyInvoiced());
                 }
-                $this->logger->debug('Item shipped: '.$qty.' itemId: '.$orderItem->getItemId());
+                $this->logger->debug('Item shipped: '.$qty.' itemId: '.$orderItem->getParentItemId());
             }
         }
 
