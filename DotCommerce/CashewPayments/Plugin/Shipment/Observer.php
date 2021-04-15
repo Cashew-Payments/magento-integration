@@ -47,6 +47,7 @@ class Observer implements ObserverInterface
                 $numShippedItems[] = $dataItem;
             }
         }
+        $response = [];
 
         if ($cashewPayment == 'cashewpayment') {
             $token = $this->apiHelper->getToken();
